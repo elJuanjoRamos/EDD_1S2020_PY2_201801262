@@ -1,0 +1,17 @@
+digraph grafica{
+rankdir=TB;graph[label="Arbol AVL", labelloc=t, fontsize=20, compound=true]
+node [shape = record, style=filled, fillcolor=white];
+nodo1 [ label ="m"];
+nodo3 [ label ="b"];
+nodo2 [ label ="a"];
+nodo3->nodo2
+nodo4 [ label ="i"];
+nodo3->nodo4
+nodo1->nodo3
+nodo6 [ label ="z"];
+nodo5 [ label ="w"];
+nodo7 [ label ="x"];
+nodo5->nodo7
+nodo6->nodo5
+nodo1->nodo6
+}

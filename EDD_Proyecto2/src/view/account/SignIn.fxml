@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.account.AuthController">
+       <children>
+      <VBox alignment="CENTER" prefHeight="201.0" prefWidth="506.0">
+         <children>
+            <ImageView fitHeight="182.0" fitWidth="248.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/logo.jpg" />
+               </image>
+            </ImageView>
+            <Label prefHeight="21.0" prefWidth="192.0" text="      Create a new Account">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <HBox layoutX="41.0" layoutY="200" prefHeight="50.0" prefWidth="384.0" styleClass="tf-box">
+         <children>
+            <TextField fx:id="name" maxHeight="-Infinity" prefHeight="49.0" prefWidth="357.0" promptText="Name" styleClass="tf">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </TextField>
+            <FontAwesomeIcon glyphStyle="-fx-fill:DEDEE4" iconName="USER" size="1.5em" text="" textAlignment="JUSTIFY" wrappingWidth="31.678571701049805">
+               <HBox.margin>
+                  <Insets top="18.0" />
+               </HBox.margin>
+            </FontAwesomeIcon>
+         </children>
+      </HBox>
+      
+      <HBox layoutX="47.0" layoutY="250" prefHeight="50.0" prefWidth="379.0" styleClass="tf-box">
+         <children>
+            <TextField fx:id="lastname" maxHeight="-Infinity" prefHeight="49.0" prefWidth="357.0" promptText="Last Name" styleClass="tf">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </TextField>
+            <FontAwesomeIcon glyphStyle="-fx-fill:DEDEE4" iconName="USER" size="1.5em" text="" textAlignment="JUSTIFY" wrappingWidth="31.678571701049805">
+               <HBox.margin>
+                  <Insets top="18.0" />
+               </HBox.margin>
+            </FontAwesomeIcon>
+            
+         </children>
+      </HBox>
+      <HBox layoutX="48.0" layoutY="300" prefHeight="50.0" prefWidth="384.0" styleClass="tf-box">
+         <children>
+            <TextField fx:id="carnet" maxHeight="-Infinity" prefHeight="49.0" prefWidth="357.0" promptText="Carnet" styleClass="tf">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </TextField>
+            <FontAwesomeIcon glyphStyle="-fx-fill:DEDEE4" iconName="PLUS" size="1.5em" wrappingWidth="30.678571701049805">
+               <HBox.margin>
+                  <Insets top="18.0" />
+               </HBox.margin>
+            </FontAwesomeIcon>
+         </children>
+      </HBox>
+      <HBox layoutX="51.0" layoutY="350" prefHeight="50.0" prefWidth="379.0" styleClass="tf-box">
+         <children>
+            <PasswordField fx:id="pass" prefHeight="49.0" prefWidth="384.0" promptText="Password" styleClass="tf">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </PasswordField>
+            <FontAwesomeIcon glyphStyle="-fx-fill:DEDEE4" iconName="LOCK" size="1.5em" wrappingWidth="26.464285850524902">
+               <HBox.margin>
+                  <Insets top="18.0" />
+               </HBox.margin>
+            </FontAwesomeIcon>
+         </children>
+      </HBox>
+      <HBox layoutX="51.0" layoutY="400" prefHeight="50.0" prefWidth="379.0" styleClass="tf-box">
+         <children>
+            <TextField fx:id="carrera" prefHeight="49.0" prefWidth="384.0" promptText="Carreer" styleClass="tf">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </TextField>
+            <FontAwesomeIcon glyphStyle="-fx-fill:DEDEE4" iconName="LOCK" size="1.5em" wrappingWidth="26.464285850524902">
+               <HBox.margin>
+                  <Insets top="18.0" />
+               </HBox.margin>
+            </FontAwesomeIcon>
+         </children>
+      </HBox>
+      <JFXButton layoutX="193.0" layoutY="505.0" onAction="#getAccess" prefHeight="49.0" prefWidth="121.0" styleClass="primary-buttton" text="Get Access" />
+      <Text fx:id="text" layoutX="138.0" layoutY="584.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="205.0" />
+   </children>
+</AnchorPane>

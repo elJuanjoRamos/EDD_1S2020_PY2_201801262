@@ -1,0 +1,255 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package view.Admin.User;
+
+import Controller.StructureController;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
+import java.io.File;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import models.User;
+
+/**
+ * FXML Controller class
+ *
+ * @author Juan José Ramos
+ */
+public class FXMLUserController implements Initializable {
+
+    
+ private static FXMLUserController instance;
+    @FXML
+    TableView<User> tableView;
+    @FXML
+    TableColumn<User, Long> carnet;
+    @FXML
+    TableColumn<User, String> name;
+    @FXML
+    TableColumn<User, String> lastname;
+    @FXML
+    TableColumn<User, String> career;
+    @FXML
+    TableColumn<User, String> password;
+
+    @FXML
+    TextField eName, eLastname, eCarnet, eCarreer, ePassword;
+    @FXML
+    Button aceptar, editar, eliminar, cancelar, subir;
+    @FXML
+    Text texto;
+    @FXML
+    StackPane stackPane;
+
+    public FXMLUserController() {
+    }
+
+    /**
+     * @return the instance
+    *
+     */
+    public static FXMLUserController getInstance() {
+        if (instance == null) {
+            instance = new FXMLUserController();
+        }
+        return instance;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        editar.setVisible(false);
+        cancelar.setVisible(false);
+        texto.setText("Add a new User");
+        carnet.setCellValueFactory(new PropertyValueFactory<>("carnet"));
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+        password.setCellValueFactory(new PropertyValueFactory<>("password"));
+        career.setCellValueFactory(new PropertyValueFactory<>("career"));
+    }
+    /**
+     * INICIALIZAR DATOS EN TABLA
+     */
+    public void initTableView() {
+        try{
+            ObservableList<User> observableList = StructureController.getInstancia().getUsers();
+            tableView.setItems(observableList);
+        } catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    @FXML
+    public void bulkLoad(ActionEvent event) {
+        Stage stage = new Stage();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JSON Files", "*.json"));
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        if (selectedFile != null) {
+                //interpret(selectedFile, "*.json");
+            
+        }
+    }
+    /**
+     * AGREGAR DATOS
+     */
+    
+    @FXML
+    private void add(ActionEvent event) {
+        if (getValidations() == true) {
+            if (isNumber(eCarnet.getText())) {
+                StructureController.getInstancia().InsertTable(Integer.parseInt(eCarnet.getText()), eName.getText(), eLastname.getText(), eCarreer.getText(), ePassword.getText());
+                clearFields();
+                initTableView();
+                StructureController.getInstancia().PrintTable();
+            } else {
+                getAlert("You can not enter text in numeric fields");
+            }
+        }
+    }
+    
+    
+    
+    /**
+     * ELIMINAR DATOS
+     */
+    @FXML
+    private void delete(ActionEvent event) {
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            StructureController.getInstancia().DeleteTable(tableView.getSelectionModel().getSelectedItem().getCarnet());
+            tableView.getSelectionModel().clearSelection();
+            initTableView();
+            StructureController.getInstancia().PrintTable();
+        } else {
+            getAlert(" No items have been selected.");
+        }
+    }
+    
+    
+    /**
+     * ACTUALIZAR DATOS
+     */
+    @FXML
+    private void update(ActionEvent event) {
+        if (getValidations() == true) {
+            if (isNumber(eCarnet.getText())) {
+                
+                StructureController.getInstancia().UpdateTable(
+                Integer.parseInt(eCarnet.getText()), eName.getText(), eLastname.getText(), eCarreer.getText(), ePassword.getText());
+                aceptar.setVisible(true);
+                editar.setVisible(false);
+                cancelar.setVisible(false);
+                texto.setText("Add a new User");
+            } else {
+                getAlert("You can not enter text in numeric fields");
+            }
+        } 
+        clearFields();
+        initTableView();
+        StructureController.getInstancia().PrintTable();
+    }
+    /**
+     * OBTENER DATOS
+     */
+    @FXML
+    private void getData(ActionEvent event) {
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            User c = StructureController.getInstancia().searchUser(tableView.getSelectionModel().getSelectedItem().getCarnet());
+            if (c != null) {
+                aceptar.setVisible(false);
+                editar.setVisible(true);
+                cancelar.setVisible(true);
+                texto.setText("Edit the Client");
+                eCarnet.setText(String.valueOf(c.getCarnet()));
+                eName.setText(c.getName());
+                eLastname.setText(c.getLastName());
+                eCarreer.setText(c.getCareer());
+                
+            }
+        } else {
+            getAlert(" No items have been selected.");
+        }
+    }
+
+    /**
+     * VER DATOS
+     */
+    @FXML
+    private void openTable(ActionEvent event) {
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            StructureController.getInstancia().DeleteTable(tableView.getSelectionModel().getSelectedItem().getCarnet());
+            tableView.getSelectionModel().clearSelection();
+            initTableView();
+        } else {
+            getAlert(" No items have been selected.");
+        }
+    }
+    
+    @FXML
+    private void cancel(ActionEvent event) {
+        clearFields();
+        initTableView();
+        aceptar.setVisible(true);
+        editar.setVisible(false);
+        cancelar.setVisible(false);
+        texto.setText("Add a new User");
+    }
+    
+    public boolean getValidations() {
+        if (!eName.getText().isEmpty() && !eLastname.getText().isEmpty()
+                && !ePassword.getText().isEmpty() && !eCarreer.getText().isEmpty() && !eCarnet.getText().isEmpty()) {
+            return true;
+        }
+        getAlert("You can not leave fields blank.");
+        return false;
+    }
+     
+    public void getAlert(String content) {
+        JFXDialogLayout c = new JFXDialogLayout();
+        JFXDialog dialog = new JFXDialog(stackPane, c, JFXDialog.DialogTransition.CENTER);
+        c.setHeading(new Text("Error!"));
+        c.setBody(new Text(content));
+        JFXButton button = new JFXButton("Close");
+        button.setOnAction((ActionEvent event) -> {
+            dialog.close();
+        });;
+        c.setActions(button);
+        dialog.show();
+    }
+        /**
+     * LIMPIAR CAMPOS DE TEXTO
+     */
+    public void clearFields() {
+        eCarnet.clear();
+        eName.clear();
+        ePassword.clear();
+        eCarreer.clear();
+        eLastname.clear();
+    }
+    public boolean isNumber(String option) {
+        try {
+            Integer.parseInt(option);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+}

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="946.0" prefWidth="1697.0" stylesheets="@../../resources/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Admin.AdminController">
+   <top>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="197.0" style="-fx-background-color: black;">
+               <children>
+                  <FontAwesomeIcon fill="#f5eeee" iconName="LASTFM" size="2.5em" />
+                  <Text fill="#eee7e7" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="WorkShop">
+                     <font>
+                        <Font name="Corbel" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white;" HBox.hgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefWidth="197.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton onAction="#open_home" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="HOME">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="HOME" size="1.5em" />
+               </graphic>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton onAction="#open_user" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="USERS">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="USER" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#open_parts" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="SPARE PARTS">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="WRENCH" size="1.5em" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#open_clients" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="CLIENTS">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="USERS" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#open_services" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="SERVICES">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="WRENCH" size="1.5em" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#open_workOrder" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="WORK ORDERS">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="FILE" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#open_processesView" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="PROCESSES">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="COG" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#open_reports" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="REPORTS">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="FILE" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#logOut" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="LOG OUT">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="LINK" size="1.5em" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox fx:id="vbox" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <children>
+           
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

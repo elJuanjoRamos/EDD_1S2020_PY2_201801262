@@ -1,0 +1,8 @@
+digraph g { 
+ graph[label="Arbol B Categoria: a", labelloc=t, fontsize=20, compound=true]; node [shape=record];
+Nodo1124103769[label="<P0>| ISBN:8\lNombre:r|<P1>"];
+Nodo1496245727[label="<P0>| ISBN:0\lNombre:a|<P1>| ISBN:1\lNombre:a|<P2>"];
+Nodo1124103769:P0 -> Nodo1496245727;
+Nodo141449481[label="<P0>| ISBN:15\lNombre:c|<P1>| ISBN:450\lNombre:c|<P2>"];
+Nodo1124103769:P1 -> Nodo141449481;
+}

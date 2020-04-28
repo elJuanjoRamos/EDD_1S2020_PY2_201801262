@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import com.jfoenix.controls.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="774.0" prefWidth="946.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.account.AccountController">
+   <children>
+      <Pane layoutY="188.0" prefHeight="400.0" prefWidth="980.0" styleClass="pane" stylesheets="@../../resources/main.css">
+         <children>
+            <Label layoutX="150.0" layoutY="168.0" style="-fx-text-fill: white;" text="DON'T HAVE AN ACCOUNT?" textAlignment="CENTER" textFill="#363333">
+               <font>
+                  <javafx.scene.text.Font size="20.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="673.0" layoutY="261.0" onAction="#open_logIn" prefHeight="50.0" prefWidth="168.0" ripplerFill="BLACK" styleClass="transparet-buttton" text="Log In" />
+            <JFXButton layoutX="150.0" layoutY="261.0" onAction="#open_signIn" prefHeight="50.0" prefWidth="168.0" ripplerFill="BLACK" styleClass="transparet-buttton" text="Sign In" />
+            <Label layoutX="649.0" layoutY="168.0" style="-fx-text-fill: white;" text="YOU ALREADY HAVE ACCOUNT?" textAlignment="CENTER" textFill="#363333">
+               <font>
+                  <javafx.scene.text.Font size="20.0" />
+               </font>
+            </Label>
+            <VBox fx:id="vbox" layoutX="14.0" layoutY="-77.0" prefHeight="550.0" prefWidth="487.0" styleClass="log-pane" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

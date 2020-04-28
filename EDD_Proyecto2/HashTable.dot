@@ -1,0 +1,6 @@
+digraph grafica{
+graph[label="Usuarios", labelloc=t, fontsize=20, compound=true];
+rankdir = LR;
+node [shape=record];
+splines=false; hashTable [label="<f0>NULL|<f1>NULL|<f2>NULL|<f3>NULL|<f4>NULL|<f5>NULL|<f6>NULL"];
+}
