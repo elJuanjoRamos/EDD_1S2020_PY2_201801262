@@ -5,8 +5,19 @@
  */
 package nodes;
 
+import java.util.ArrayList;
 import models.Book;
 
+/**
+ *
+ * @author Juan José Ramos
+ */
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 /**
  *
  * @author Juan José Ramos
@@ -16,55 +27,28 @@ public class BTreeNode {
     
     public int mK;
     public int mB;
-    public Ordenable[] mLlaves;
-    public Object[] mDatos;
-    public BTreeNode[] mPunteros;
+    public int[] keys;
+    public Object[] datas;
+    public BTreeNode[] pointers;
     
-    private static int numeroDeNodo = 1;
+    private static int NodeNumber = 1;
     
     public String getDotName() {
         return "Nodo" + this.hashCode();
     }
-    
-    public String toDot(  )  {
-        
-        StringBuilder b = new StringBuilder();
-        
-        b.append( getDotName() );
-        b.append("[label=\"<P0>");
-        Book book = (Book)mDatos[0];
-        for( int i = 0; i < mB; i++ ) {
-             
-            b.append( "| ISBN:" +  mLlaves[i].getKey().toString() + "\\lNombre:" + book.getTittle() );
-            b.append( "|<P" + (i+1) + ">" );                
-        }
-        
-        b.append("\"];\n");
-        
-        for( int i = 0; i <= mB ; i++ ) {
-            if( mPunteros[i] != null )   {
-                b.append( mPunteros[i].toDot() );
-                b.append( getDotName() + ":P" + i + " -> " + mPunteros[i].getDotName() + ";\n" );
-            }
-        }
-        
-        return b.toString();
-        
-    }
-    
     public BTreeNode(int pK) {
         this.mK = pK;
         mB = 0;
-        mLlaves = new Ordenable[2 * pK + 1];
-        mDatos = new Object[2 * pK + 1];
-        mPunteros = new BTreeNode[(2 * pK) + 2];
+        keys = new int[2 * pK + 1];
+        datas = new Object[2 * pK + 1];
+        pointers = new BTreeNode[(2 * pK) + 2];
     }
 
-    public BTreeNode(int pK, Ordenable pLlave, Object pDato) {
+    public BTreeNode(int pK, int pLlave, Object pDato) {
         this(pK);
         mB = 1;
-        mLlaves[0] = pLlave;
-        mDatos[0] = pDato;
+        keys[0] = pLlave;
+        datas[0] = pDato;
     }
 
     public void setK(int mK) {
@@ -75,13 +59,6 @@ public class BTreeNode {
         return mK;
     }
 
-    public int getmK() {
-        return mK;
-    }
-
-    public void setmK(int mK) {
-        this.mK = mK;
-    }
 
     public int getmB() {
         return mB;
@@ -91,38 +68,120 @@ public class BTreeNode {
         this.mB = mB;
     }
 
-    public Ordenable[] getmLlaves() {
-        return mLlaves;
+    public int[] getKeys() {
+        return keys;
     }
 
-    public void setmLlaves(Ordenable[] mLlaves) {
-        this.mLlaves = mLlaves;
+    public void setKeys(int[] keys) {
+        this.keys = keys;
     }
 
-    public Object[] getmDatos() {
-        return mDatos;
+    public Object[] getDatas() {
+        return datas;
     }
 
-    public void setmDatos(Object[] mDatos) {
-        this.mDatos = mDatos;
+    public void setDatas(Object[] datas) {
+        this.datas = datas;
     }
 
-    public BTreeNode[] getmPunteros() {
-        return mPunteros;
+    public BTreeNode[] getPointers() {
+        return pointers;
     }
 
-    public void setmPunteros(BTreeNode[] mPunteros) {
-        this.mPunteros = mPunteros;
+    public void setPointers(BTreeNode[] pointers) {
+        this.pointers = pointers;
     }
 
-    public static int getNumeroDeNodo() {
-        return numeroDeNodo;
+    public static int getNodeNumber() {
+        return NodeNumber;
     }
 
-    public static void setNumeroDeNodo(int numeroDeNodo) {
-        BTreeNode.numeroDeNodo = numeroDeNodo;
+    public static void setNodeNumber(int NodeNumber) {
+        BTreeNode.NodeNumber = NodeNumber;
+    }
+    public String toDot(  )  {
+        
+        StringBuilder b = new StringBuilder();
+        
+        b.append( getDotName() );
+        b.append("[label=\"<P0>");
+        for( int i = 0; i < mB; i++ ) {
+            Book book = (Book)datas[i];
+            b.append( "| ISBN:" +  keys[i] + "\\lTittle: " + book.getTittle());
+            b.append( "|<P" + (i+1) + ">" );                
+        }
+        
+        b.append("\"];\n");
+        
+        for( int i = 0; i <= mB ; i++ ) {
+            if( pointers[i] != null )   {
+                b.append( pointers[i].toDot() );
+                b.append( getDotName() + ":P" + i + " -> " + pointers[i].getDotName() + ";\n" );
+            }
+        }
+        
+        return b.toString();
+        
     }
     
+    static ArrayList ar = new ArrayList();
+    public void traverse(int x) { 
+ 
+        int i = 0; 
+        int j = 0;
+        for (int k = 0; k < this.keys.length; k++) {
+            
+            if (this.keys[k] != 0) {
+                j++;
+            }
+        }
+        for (i = 0; i < j; i++) { 
+  
+            if (this.pointers[0] != null) { 
+                pointers[i].traverse(x); 
+            } 
+            //System.out.print(keys[i] + " "); 
+            if (((Book)datas[i]).getCarnet() == x) {
+                ar.add((Book)datas[i]);
+            }
+        } 
+  
+        if (this.pointers[0] != null) { 
+            pointers[i].traverse(x); 
+        }
+            
+    }
+    public boolean searchKey(int x) { 
+  
+        int i = 0; 
+        int j = 0;
+        for (int k = 0; k < this.keys.length; k++) {
+            
+            if (this.keys[k] != 0) {
+                j++;
+            }
+        }
+        for (i = 0; i < j; i++) { 
+  
+            if (this.pointers[0] != null) { 
+                pointers[i].traverse(x); 
+            } 
+            if ((int)keys[i] == x) {
+                return true;
+            }
+        } 
+        if (this.pointers[0] != null) { 
+            pointers[i].traverse(x); 
+        }
+        return false;
+    }
+    
+    public void clearArray(){
+        this.ar.clear();
+    }
+    public ArrayList getArray(){
+        return this.ar;
+    }
     
 }
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.account.init.ServerController">
+   <children>
+      <TextField fx:id="ip" layoutX="46.0" layoutY="79.0" promptText="Client" />
+      <TextField fx:id="server" layoutX="46.0" layoutY="120.0" promptText="Server" />
+      <TextField fx:id="port" layoutX="46.0" layoutY="159.0" promptText="Port Client" />
+      <TextField fx:id="portServer" layoutX="46.0" layoutY="200.0" promptText="Port Server" />
+      <Button fx:id="authenticate" layoutX="46.0" layoutY="250.0" mnemonicParsing="false" onAction="#authenticate" prefHeight="26.0" prefWidth="149.0" text="Button" />
+   </children>
+</AnchorPane>

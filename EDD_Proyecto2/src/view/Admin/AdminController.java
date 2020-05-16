@@ -5,6 +5,7 @@
  */
 package view.Admin;
 
+import Controller.ServerClientController;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -45,54 +46,40 @@ public class AdminController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        changeView("Home.fxml");
+        changeView("/view/Admin/Home.fxml");
     }    
     @FXML
     private void open_user(ActionEvent event) {
-      changeView("User/FXMLUser.fxml");
+      changeView("/view/Admin/User/FXMLUser.fxml");
         
     }
     @FXML
     private void open_home(ActionEvent event) {
-        changeView("/views/Admin/Home.fxml");
+        changeView("/view/Admin/Home.fxml");
         
-    }
-    @FXML
-    private void open_services(ActionEvent event) {
-        changeView("/views/Admin/Service/ServicesView.fxml");
-        
-    }
-    @FXML
-    private void open_parts(ActionEvent event) {
-        changeView("/views/Admin/SpareParts/SparePartsView.fxml");
-        
-    }
-    @FXML
-    private void open_cars(ActionEvent event) {
-        changeView("/views/Admin/Car/FXMLCarView.fxml");
-    }
-    @FXML
-    private void open_clients(ActionEvent event) {
-        changeView("/views/Admin/Client/FXMLClientView.fxml");
-    }
-    @FXML
-    private void open_workOrder(ActionEvent event) {
-        changeView("/views/Admin/WorkOrder/WorkOrderView.fxml");
-    }
-    @FXML
-    private void open_processesView(ActionEvent event) {
-        changeView("/views/Admin/Processes/ProcessesView.fxml");
     }
     @FXML
     private void open_reports(ActionEvent event) {
-        changeView("/views/Admin/Report/ReportView.fxml");
+        changeView("/view/Admin/Reports/Reports.fxml");
     }
+
+    
     @FXML 
     public void logOut( ActionEvent event ) throws Exception {
+        ServerClientController.getInstancia().stopTHread();
         Account.getInstance().start(Admin.s);
     }
     public void changeView(String component){
-        URL url;
+        try {
+            fxml = (Parent) FXMLLoader.load(getClass().getResource(component));
+            vbox.getChildren().removeAll();
+            vbox.getChildren().setAll(fxml);
+        } catch (IOException ex) {
+            System.out.println(ex);
+            Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        /*URL url;
         try {
             url = new File("src/view/Admin/" + component).toURI().toURL();
             try {
@@ -105,7 +92,7 @@ public class AdminController implements Initializable {
             }
         } catch (Exception e) {
             System.out.println(e);
-        }
+        }*/
     }
     
 }

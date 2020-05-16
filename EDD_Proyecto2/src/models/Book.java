@@ -5,34 +5,41 @@
  */
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Juan José Ramos
  */
-public class Book {
+public class Book  implements Serializable {
     int isbn;
     String tittle;
     String autor;
-    String editorial;
+    String category;
     int year;
     ArrayList edition;
-    ArrayList category;
+    ArrayList editorial;
     String languaje;
     int carnet;
 
-    public Book(int isbn, String tittle, String autor, String editorial, int year, ArrayList edition, ArrayList category, String languaje, int carnet) {
+    public Book(int isbn, String tittle, String autor, String category, int year, ArrayList edition, ArrayList editorial, String languaje, int carnet) {
         this.isbn = isbn;
         this.tittle = tittle;
         this.autor = autor;
-        this.editorial = editorial;
+        this.category = category;
         this.year = year;
         this.edition = edition;
-        this.category = category;
+        this.editorial = editorial;
         this.languaje = languaje;
         this.carnet = carnet;
     }
+    
+    public Book(int isbn, String category) {
+        this.isbn = isbn;
+        this.category = category;
+    }
+
     public int getIsbn() {
         return isbn;
     }
@@ -57,12 +64,12 @@ public class Book {
         this.autor = autor;
     }
 
-    public String getEditorial() {
-        return editorial;
+    public String getCategory() {
+        return category;
     }
 
-    public void setEditorial(String editorial) {
-        this.editorial = editorial;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public int getYear() {
@@ -81,12 +88,12 @@ public class Book {
         this.edition = edition;
     }
 
-    public ArrayList getCategory() {
-        return category;
+    public ArrayList getEditorial() {
+        return editorial;
     }
 
-    public void setCategory(ArrayList category) {
-        this.category = category;
+    public void setEditorial(ArrayList editorial) {
+        this.editorial = editorial;
     }
 
     public String getLanguaje() {
@@ -105,6 +112,7 @@ public class Book {
         this.carnet = carnet;
     }
 
+    
     
     
     

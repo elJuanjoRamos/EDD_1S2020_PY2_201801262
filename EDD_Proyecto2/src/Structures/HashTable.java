@@ -137,7 +137,24 @@ public class HashTable<K, Object> {
   
         // If key not found 
         return null; 
-    } 
+    }
+    public Object get(K key, String pass) 
+    { 
+        // Find head of chain for given key 
+        int bucketIndex = getHashFunction(key); 
+        HashNode<K, Object> head = hashTable.get(bucketIndex); 
+  
+        // Search key in chain 
+        while (head != null) 
+        { 
+            if (head.getKey().equals(key) && ((User)head.getValue()).getPassword().equals(pass) ) 
+                return head.getValue(); 
+            head = head.getNext(); 
+        } 
+  
+        // If key not found 
+        return null; 
+    }
   
     // Adds a key value pair to hash 
     public void add(K key, Object value) 
@@ -191,7 +208,7 @@ public class HashTable<K, Object> {
             e.printStackTrace();
         }
 
-        Runtime.getRuntime().exec("dot -Tjpg -o HashTable.png HashTable.dot");
+        Runtime.getRuntime().exec("dot -Tjpg -o src/resources/img/HashTable.png HashTable.dot");
 
     }
     
@@ -207,22 +224,22 @@ public class HashTable<K, Object> {
                  User u = ((User)hashNode.getValue());
                 if (i+1 != hashTable.size()) {
                     
-                    hasht = hasht + "<f" + i + "> Indice: " + i + "\\lNombre: " + u.getName() +"\\lApellido: " + u.getLastName() + "\\lCarnet: " + u.getCarnet() + "\\lCarrera: " + u.getCareer() + "\\lPassword: " + u.getPassword() + "|";
+                    hasht = hasht + "<f" + i + "> Indice: " + i + "\\lNombre: " + u.getName() +"\\lApellido: " + u.getLastName() + "\\lCarnet: " + u.getCarnet() + "\\lCarrera: " + u.getCareer() + "|";
                     
                 } else {
-                    hasht = hasht + "<f" + i + "> Indice: " + i + "\\lNombre: " + u.getName() +"\\lApellido: " + u.getLastName() + "\\lCarnet: " + u.getCarnet() + "\\lCarrera: " + u.getCareer() + "\\lPassword: " + u.getPassword();
+                    hasht = hasht + "<f" + i + "> Indice: " + i + "\\lNombre: " + u.getName() +"\\lApellido: " + u.getLastName() + "\\lCarnet: " + u.getCarnet() + "\\lCarrera: " + u.getCareer() ;
                 }
                 
                 HashNode<K, Object> temp = hashNode.getNext();
                 
                  if (temp != null) {
-                     hashNext = hashNext + "node_" + i +"_" + temp.getKey() + " [label=\"<f0> Indice: " + i + "\\lNombre: " +  u.getName() +"\\lApellido: " + u.getLastName()+ "\\lCarnet: " + u.getCarnet() + "\\lCarrera: " + u.getCareer() + "\\lPassword: " + u.getPassword() + "\" ];\n";
+                     hashNext = hashNext + "node_" + i +"_" + temp.getKey() + " [label=\"<f0> Indice: " + i + "\\lNombre: " +  u.getName() +"\\lApellido: " + u.getLastName()+ "\\lCarnet: " + u.getCarnet() + "\\lCarrera: " + u.getCareer() + "\" ];\n";
                      hashNext = hashNext+ "hashTable:f"+ i + "-> node_" + i + "_" + temp.getKey()+":f0;\n";
                     
                      while (temp != null) {
                          HashNode<K, Object> temp2 = temp;
                          User u2 = (User)temp2.getValue();
-                         hashNext = hashNext + "node_" + i +"_" + temp.getKey() + " [label=\"<f0> Indice: " + i + "\\lNombre: " +   u2.getName() +"\\lApellido: " + u2.getLastName()+ "\\lCarnet: " + u2.getCarnet() + "\\lCarrera: " + u2.getCareer() + "\\lPassword: " + u2.getPassword()   + "\" ];\n";
+                         hashNext = hashNext + "node_" + i +"_" + temp.getKey() + " [label=\"<f0> Indice: " + i + "\\lNombre: " +   u2.getName() +"\\lApellido: " + u2.getLastName()+ "\\lCarnet: " + u2.getCarnet() + "\\lCarrera: " + u2.getCareer() + "\" ];\n";
                          temp = temp.getNext();
                          
                          if (temp != null) {

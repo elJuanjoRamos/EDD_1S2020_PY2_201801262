@@ -5,13 +5,15 @@
  */
 package models;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Juan José Ramos
  */
 
 //clase estudiante
-public class User {
+public class User implements Serializable{
     int carnet;
     String name;
     String lastname;

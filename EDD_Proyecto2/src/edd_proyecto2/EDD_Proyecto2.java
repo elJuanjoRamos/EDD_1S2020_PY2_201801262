@@ -5,21 +5,11 @@
  */
 package edd_proyecto2;
 
+import Structures.DoubleList;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import Controller.StructureController;
-import Structures.HashTable;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import view.account.Account;
+import view.account.init.Server;
 /**
  *
  * @author Juan José Ramos
@@ -28,9 +18,18 @@ public class EDD_Proyecto2 extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception {
+        /*DoubleList doubleList = new DoubleList();
+        doubleList.addLastNode("192.168.16.101");
+        doubleList.show();*/
+        /*DoubleList doubleList = new DoubleList();
+        doubleList.addLastNode("192.168.16.101");
+        doubleList.addLastNode("192.168.16.102");
+        doubleList.addLastNode("192.168.16.103");
+        doubleList.addLastNode("192.168.13.104");
+        */
         
-        Account.getInstance().start(primaryStage);
-
+        //Account.getInstance().start(primaryStage);
+        Server.getInstance().start(primaryStage);
         /*Button btn = new Button();
         btn.setText("Say 'Hello World'");
         

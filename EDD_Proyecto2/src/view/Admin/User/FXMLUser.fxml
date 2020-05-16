@@ -21,7 +21,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1238.0" style="-fx-background-color: #6200EE;">
                <children>
                   <FontAwesomeIcon glyphStyle="-fx-fill:white" iconName="USER" size="3.5em" />
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="LIBRARY CLIENTS">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="LIBRARY USERS">
                      <font>
                         <Font name="Corbel Bold" size="40.0" />
                      </font>
@@ -72,6 +72,14 @@
                                           <Insets bottom="10.0" right="10.0" top="10.0" />
                                        </HBox.margin>
                                     </JFXButton>
+                                    <JFXButton onAction="#openTable" prefHeight="31.0" prefWidth="99.0" styleClass="success-buttton" text="Open">
+                                       <graphic>
+                                          <FontAwesomeIcon glyphStyle="-fx-fill:#007bff" iconName="PLUS" />
+                                       </graphic>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
                                  </children>
                                  <HBox.margin>
                                     <Insets left="200.0" />
@@ -87,11 +95,11 @@
                         </HBox>
                         <TableView fx:id="tableView" prefHeight="556.0" VBox.vgrow="ALWAYS">
                            <columns>
-                              <TableColumn fx:id="carnet" maxWidth="-1.0" minWidth="100" prefWidth="180.0" text="CARNET" />
-                              <TableColumn fx:id="name" maxWidth="-1.0" minWidth="200" prefWidth="319.0" text="NAME" />
-                              <TableColumn fx:id="lastname" maxWidth="-1.0" minWidth="100" prefWidth="129.0" text="LASTNAME" />
-                              <TableColumn fx:id="career" maxWidth="-1.0" minWidth="100" prefWidth="129.0" text="CARREER" />
-                              <TableColumn fx:id="password" maxWidth="-1.0" minWidth="200" prefWidth="129.0" text="PASSWORD" />
+                              <TableColumn fx:id="carnet" maxWidth="-1.0" minWidth="150" prefWidth="300" text="CARNET" />
+                              <TableColumn fx:id="name" maxWidth="-1.0" minWidth="200" prefWidth="400" text="NOMBRE" />
+                              <TableColumn fx:id="apellido" maxWidth="-1.0" minWidth="200" prefWidth="400" text="APELLIDO" />
+                              <TableColumn fx:id="career" maxWidth="-1.0" minWidth="200" prefWidth="400" text="CARRERA" />
+                              <TableColumn fx:id="password" maxWidth="-1.0" minWidth="200" prefWidth="300" text="PASSWORD" />
                            </columns>
                         </TableView>
                      </children>

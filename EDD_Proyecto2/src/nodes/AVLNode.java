@@ -9,6 +9,7 @@ import Structures.BTree;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import models.Category;
 
 /**
  *
@@ -19,15 +20,15 @@ public class AVLNode {
     static int correlative = 1;
     BTree btree;
     int height, index;
-    String key;
+    Category category;
     AVLNode left, right;
 
     public AVLNode() {
 
     }
 
-    public AVLNode(String d) {
-        this.key = d;
+    public AVLNode(Category o) {
+        this.category = o;
         this.height = 1;
         this.index = correlative++;
         this.left = null;
@@ -43,8 +44,8 @@ public class AVLNode {
         this.btree = btree;
     }
 
-    public void setKey(String k) {
-        this.key = k;
+    public void setObject(Category o) {
+        this.category = o;
     }
 
     public void setHeight(int h) {
@@ -59,8 +60,8 @@ public class AVLNode {
         this.right = r;
     }
 
-    public String getKey() {
-        return this.key;
+    public Category getCategory() {
+        return this.category;
     }
 
     public int getHeight() {
@@ -79,6 +80,9 @@ public class AVLNode {
         return this.right;
     }
 
+    
+    
+    
     public void Print() throws IOException {
         String name = "Arbol AVL";
         String texto = "";
@@ -97,18 +101,30 @@ public class AVLNode {
             e.printStackTrace();
         }
 
-        Runtime.getRuntime().exec("dot -Tjpg -o AVLTree.png AVLTree.dot");
-
+        Runtime.getRuntime().exec("dot -Tjpg -o src/resources/img/AVLTree.png AVLTree.dot");
     }
 
+
     public String GetBody() {
-        String etiqueta;
+        String etiqueta = "";
         if (left == null && right == null) {
-            etiqueta = "nodo" + (index) + " [ label =\"" +   key + "\"];\n";
+            etiqueta = "nodo" + (index) + " [ label =\"" + "0|" + "Name: " + category.getName() + "\\lQ.Books: " + btree.getQuantityKeys() + "\\lBalance: 0" + "|0" + "\"];\n";
         } else {
-           etiqueta = "nodo" + (index) + " [ label =\"" +   key + "\"];\n";
             
-            //etiqueta = "nodo" + (index) + "[ label =\"" + key + "\"];\n";
+            if(left != null && right != null){
+                etiqueta = "nodo" + (index) + " [ label =\""+ left.getHeight() + "|" 
+                        + "Name: " + category.getName() + "\\lQ.Books: " + btree.getQuantityKeys() + "\\lBalance: " 
+                        + (left.getHeight()-right.getHeight())  + "|"  + right.getHeight() + "\"];\n";
+            
+            } else if (left != null && right == null){
+                etiqueta = "nodo" + (index) + " [ label =\""+ left.getHeight() + "|" 
+                        + "Name: " + category.getName() + "\\lQ.Books: " + btree.getQuantityKeys() + "\\lBalance: " + (left.getHeight())  + "|"  + 0 + "\"];\n";
+            
+            } else if(left == null && right != null) {
+                etiqueta = "nodo" + (index) + " [ label =\""+ 0 + "|" 
+                        + "Name: " + category.getName() + "\\lQ.Books: " + btree.getQuantityKeys() + "\\lBalance: " +  right.getHeight() + "|"  + right.getHeight() + "\"];\n";
+                
+            }
         }
         if (left != null) {
             etiqueta = etiqueta + left.GetBody()

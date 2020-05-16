@@ -1,0 +1,5 @@
+digraph grafica{
+graph[label="Lista de nodos en red", labelloc=t, fontsize=20, compound=true];
+rankdir = LR;
+node [shape=record];
+splines=false; }

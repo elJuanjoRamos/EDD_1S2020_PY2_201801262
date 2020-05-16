@@ -10,14 +10,24 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.URL;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -26,14 +36,21 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import models.Configuration;
+import models.DataServer;
 import models.User;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.*;
+
 
 /**
  * FXML Controller class
  *
  * @author Juan José Ramos
  */
-public class FXMLUserController implements Initializable {
+public class FXMLUserController implements Initializable, Runnable {
 
     
  private static FXMLUserController instance;
@@ -44,7 +61,7 @@ public class FXMLUserController implements Initializable {
     @FXML
     TableColumn<User, String> name;
     @FXML
-    TableColumn<User, String> lastname;
+    TableColumn<User, String> apellido;
     @FXML
     TableColumn<User, String> career;
     @FXML
@@ -58,7 +75,7 @@ public class FXMLUserController implements Initializable {
     Text texto;
     @FXML
     StackPane stackPane;
-
+    Thread thread;
     public FXMLUserController() {
     }
 
@@ -80,9 +97,12 @@ public class FXMLUserController implements Initializable {
         texto.setText("Add a new User");
         carnet.setCellValueFactory(new PropertyValueFactory<>("carnet"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+        apellido.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         password.setCellValueFactory(new PropertyValueFactory<>("password"));
         career.setCellValueFactory(new PropertyValueFactory<>("career"));
+        initTableView();
+        //thread = new Thread(this);
+        //thread.start();
     }
     /**
      * INICIALIZAR DATOS EN TABLA
@@ -96,7 +116,7 @@ public class FXMLUserController implements Initializable {
         }
     }
     @FXML
-    public void bulkLoad(ActionEvent event) {
+    public void bulkLoad(ActionEvent event) throws FileNotFoundException, IOException, ParseException {
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
@@ -104,9 +124,72 @@ public class FXMLUserController implements Initializable {
                 new FileChooser.ExtensionFilter("JSON Files", "*.json"));
         File selectedFile = fileChooser.showOpenDialog(stage);
         if (selectedFile != null) {
-                //interpret(selectedFile, "*.json");
+            
+            
+            Object obj = new JSONParser().parse(new FileReader(selectedFile)); 
+
+            // typecasting obj to JSONObject 
+            JSONObject jo = (JSONObject) obj; 
+
+            Iterator<Map.Entry> itr1 = null; 
+            
+            
+            // getting phoneNumbers 
+            JSONArray ja = (JSONArray) jo.get("Usuarios"); 
+
+            // iterating phoneNumbers 
+            Iterator itr2 = ja.iterator(); 
+
+            while (itr2.hasNext())  
+            { 
+                itr1 = ((Map) itr2.next()).entrySet().iterator(); 
+                String name = "";
+                String lastname = "";
+                String career = "";
+                String password = "";
+                int carnet = 0;
+                
+                while (itr1.hasNext()) { 
+                    Map.Entry pair = itr1.next(); 
+                    if (pair.getKey().equals("Nombre")) {
+                        name = (String)pair.getValue();
+                    }
+                    if (pair.getKey().equals("Apellido")) {
+                        lastname = (String)pair.getValue();
+                    }
+                    if (pair.getKey().equals("Carrera")) {
+                        career = (String)pair.getValue();
+                    }
+                    if (pair.getKey().equals("Password")) {
+                        password = (String)pair.getValue();
+                    }
+                    if (pair.getKey().equals("Carnet")) {
+                        carnet = Integer.parseInt(pair.getValue().toString());
+                    }
+                }
+                try {
+                    User u = new User(carnet, name, lastname, career, password);
+                    Socket socket = new Socket(Configuration.ipServer, Integer.parseInt("8000"));
+                    DataServer servidorEDD = new DataServer();
+                    servidorEDD.setState("Add");
+                    servidorEDD.setIp(Configuration.ip);
+                    servidorEDD.setUser(u);
+                    ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+                    objectOutputStream.writeObject(servidorEDD);
+                    socket.close();
+                } catch (IOException ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }
             
         }
+        try {
+            Thread.sleep(2000);
+            initTableView();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(FXMLUserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        StructureController.getInstancia().PrintTable();
     }
     /**
      * AGREGAR DATOS
@@ -116,9 +199,26 @@ public class FXMLUserController implements Initializable {
     private void add(ActionEvent event) {
         if (getValidations() == true) {
             if (isNumber(eCarnet.getText())) {
-                StructureController.getInstancia().InsertTable(Integer.parseInt(eCarnet.getText()), eName.getText(), eLastname.getText(), eCarreer.getText(), ePassword.getText());
+                try {
+                    User u = new User(Integer.parseInt(eCarnet.getText()), eName.getText(), eLastname.getText(), eCarreer.getText(), ePassword.getText());
+                    Socket socket = new Socket(Configuration.ipServer, Integer.parseInt("8000"));
+                    DataServer servidorEDD = new DataServer();
+                    servidorEDD.setState("Add");
+                    servidorEDD.setIp(Configuration.ip);
+                    servidorEDD.setUser(u);
+                    ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+                    objectOutputStream.writeObject(servidorEDD);
+                    socket.close();
+                } catch (IOException ex) {
+                    System.err.println(ex.getMessage());
+                }
                 clearFields();
-                initTableView();
+                try {
+            Thread.sleep(2000);
+            initTableView();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(FXMLUserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
                 StructureController.getInstancia().PrintTable();
             } else {
                 getAlert("You can not enter text in numeric fields");
@@ -134,10 +234,29 @@ public class FXMLUserController implements Initializable {
     @FXML
     private void delete(ActionEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            StructureController.getInstancia().DeleteTable(tableView.getSelectionModel().getSelectedItem().getCarnet());
-            tableView.getSelectionModel().clearSelection();
+            try {
+                    User u = new User();
+                    u.setCarnet(tableView.getSelectionModel().getSelectedItem().getCarnet());
+                    Socket socket = new Socket(Configuration.ipServer, Integer.parseInt("8000"));
+                    DataServer servidorEDD = new DataServer();
+                    servidorEDD.setState("Del");
+                    servidorEDD.setIp(Configuration.ip);
+                    servidorEDD.setUser(u);
+                    ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+                    objectOutputStream.writeObject(servidorEDD);
+                    socket.close();
+                            initTableView();
+                            StructureController.getInstancia().PrintTable();
+                } catch (IOException ex) {
+                    System.err.println(ex.getMessage());
+                }
+                try {
+            Thread.sleep(2000);
             initTableView();
-            StructureController.getInstancia().PrintTable();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(FXMLUserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                StructureController.getInstancia().PrintTable();
         } else {
             getAlert(" No items have been selected.");
         }
@@ -151,19 +270,35 @@ public class FXMLUserController implements Initializable {
     private void update(ActionEvent event) {
         if (getValidations() == true) {
             if (isNumber(eCarnet.getText())) {
-                
-                StructureController.getInstancia().UpdateTable(
-                Integer.parseInt(eCarnet.getText()), eName.getText(), eLastname.getText(), eCarreer.getText(), ePassword.getText());
+                try {
+                    User u = new User(Integer.parseInt(eCarnet.getText()), eName.getText(), eLastname.getText(), eCarreer.getText(), ePassword.getText());
+                    Socket socket = new Socket(Configuration.ipServer, Integer.parseInt("8000"));
+                    DataServer servidorEDD = new DataServer();
+                    servidorEDD.setState("Edit");
+                    servidorEDD.setIp(Configuration.ip);
+                    servidorEDD.setUser(u);
+                    ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+                    objectOutputStream.writeObject(servidorEDD);
+                    socket.close();
+                } catch (IOException ex) {
+                    System.err.println(ex.getMessage());
+                }
                 aceptar.setVisible(true);
                 editar.setVisible(false);
                 cancelar.setVisible(false);
                 texto.setText("Add a new User");
+                clearFields();
+                
             } else {
                 getAlert("You can not enter text in numeric fields");
             }
         } 
-        clearFields();
-        initTableView();
+        try {
+            Thread.sleep(2000);
+            initTableView();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(FXMLUserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         StructureController.getInstancia().PrintTable();
     }
     /**
@@ -194,13 +329,20 @@ public class FXMLUserController implements Initializable {
      */
     @FXML
     private void openTable(ActionEvent event) {
-        if (tableView.getSelectionModel().getSelectedItem() != null) {
-            StructureController.getInstancia().DeleteTable(tableView.getSelectionModel().getSelectedItem().getCarnet());
-            tableView.getSelectionModel().clearSelection();
-            initTableView();
-        } else {
-            getAlert(" No items have been selected.");
-        }
+         JFXDialogLayout c = new JFXDialogLayout();
+        JFXDialog dialog = new JFXDialog(stackPane, c, JFXDialog.DialogTransition.CENTER);
+        c.setHeading(new Text("Error!"));
+        c.setBody(new Text("Hola"));
+        javafx.scene.image.Image image = new javafx.scene.image.Image("resources/img/car1.png");
+    
+//        c.setBody(image);
+        
+        JFXButton b = new JFXButton("Close");
+        b.setOnAction((ActionEvent e) -> {
+            dialog.close();
+        });;
+        c.setActions(b);
+        dialog.show();
     }
     
     @FXML
@@ -252,4 +394,53 @@ public class FXMLUserController implements Initializable {
             return false;
         }
     }
+
+    @Override
+    public void run() {
+        try {
+            ServerSocket serverSocket = new ServerSocket(Integer.parseInt("8200"));
+            DataServer dataServer = null;
+            while(true) {
+                Socket cliente = serverSocket.accept();
+                ObjectInputStream flujoEntrada = new ObjectInputStream(cliente.getInputStream());
+                
+                dataServer = (DataServer) flujoEntrada.readObject();
+                if(dataServer.getUser() != null) {
+                    User u = dataServer.getUser();
+
+                    switch(dataServer.getState()) {
+                        case "Add":
+                            StructureController.getInstancia().InsertTable(u.getCarnet(), u.getName(), u.getLastName(), u.getCareer(), u.getPassword());
+                            clearFields();
+                            initTableView();
+                            StructureController.getInstancia().PrintTable();
+                            break;
+                        case "Edit":
+                            StructureController.getInstancia().UpdateTable(u.getCarnet(), u.getName(), u.getLastName(), u.getCareer(), u.getPassword());
+                            clearFields();
+                            initTableView();
+                            StructureController.getInstancia().PrintTable();
+                            break;
+                        case "Del":
+                            StructureController.getInstancia().DeleteTable(u.getCarnet());
+                            tableView.getSelectionModel().clearSelection();
+                            initTableView();
+                            StructureController.getInstancia().PrintTable();
+                            break;
+                    }
+                    
+                    
+                }
+                cliente.close();
+                System.out.println("i am listening");
+            }
+            
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        } catch (ClassNotFoundException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+    
+    
 }

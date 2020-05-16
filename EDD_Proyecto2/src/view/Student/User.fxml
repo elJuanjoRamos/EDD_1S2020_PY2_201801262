@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="946.0" prefWidth="1697.0" stylesheets="@../../resources/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Student.UserController">
+ <top>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="197.0" style="-fx-background-color: black;">
+               <children>
+                  <FontAwesomeIcon fill="#f5eeee" iconName="LASTFM" size="2.5em" />
+                  <Text fill="#eee7e7" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="LIBRARY">
+                     <font>
+                        <Font name="Corbel" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white;" HBox.hgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefWidth="197.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton onAction="#open_Dash" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="DASHBOARD">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="HOME" size="1.5em" />
+               </graphic>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton onAction="#my_Category" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="MY CATEGORIES">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="WRENCH" size="1.5em" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#my_Books" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="MY BOOKS">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="BOOK" size="1.5em" />
+               </graphic>
+            </JFXButton>
+            
+            <JFXButton onAction="#open_Processes" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="GENERAL LIBRARY">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="BOOK" size="1.5em" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#logOut" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="LogOut">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="UNLINK" size="1.5em" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox fx:id="vbox" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <children>
+           
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
