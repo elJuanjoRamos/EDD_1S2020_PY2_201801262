@@ -271,9 +271,18 @@ public class SocketServerController implements Initializable, Runnable {
                 jsonObject.put("UPDATE_USER", jsonBody);
             }
         }
+        System.out.println("Cosa: " + type  );
         //CUANDO SE INSERTA UN NUEVO NODO, SIMPLEMENTE CREA EL BLOQUE
         if (type.equals("Computer")) {
+            if(!dbList.Exist(ip)){
                 dbList.addLastNode(ip, null);
+            } else {
+                System.out.println("ya existe");
+            }
+            try {
+                dbList.Print();
+            } catch (Exception e) {
+            }
         } else {
             //SI EL NODO YA ESTA CREADO, SE VA A BUSCAR
             if (dbList.getRoot() == null) {
@@ -284,10 +293,7 @@ public class SocketServerController implements Initializable, Runnable {
                 dbList.show();
             }
         } 
-        try {
-            dbList.Print();
-        } catch (Exception e) {
-        }
+        
  
 
     }

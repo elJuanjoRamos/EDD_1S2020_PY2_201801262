@@ -83,6 +83,22 @@ public class DoubleList {
         }
         hash = aux;
     }
+    
+    
+    public boolean Exist(String ip){
+        boolean findIt = false;
+        DoubleListNode temp = first;
+        while(temp != null){
+            
+            if(temp.getBlockchain().getIp().equals(ip)){
+                findIt = true;
+                break;
+            } else {
+                temp = temp.getNext();
+            }
+        }
+        return findIt;
+    }
     public DoubleListNode getRoot(){
         return first;
     }
@@ -152,7 +168,7 @@ public class DoubleList {
             e.printStackTrace();
         }
 
-        Runtime.getRuntime().exec("dot -Tjpg -o src/resources/img/DoubleList.png DoubleList.dot");
+        Runtime.getRuntime().exec("dot -Tjpg -o DoubleList.png DoubleList.dot");
 
     }
      

@@ -62,7 +62,7 @@ public class FXMLUserController implements Initializable {
     @FXML
     TableColumn<User, String> name;
     @FXML
-    TableColumn<User, String> apellido;
+    TableColumn<User, String> lastname;
     @FXML
     TableColumn<User, String> career;
     @FXML
@@ -98,7 +98,7 @@ public class FXMLUserController implements Initializable {
         texto.setText("Add a new User");
         carnet.setCellValueFactory(new PropertyValueFactory<>("carnet"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        apellido.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+        lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         password.setCellValueFactory(new PropertyValueFactory<>("password"));
         career.setCellValueFactory(new PropertyValueFactory<>("career"));
         initTableView();
@@ -263,6 +263,7 @@ public class FXMLUserController implements Initializable {
         } else {
             getAlert(" No items have been selected.");
         }
+        StructureController.getInstancia().PrintTable();
     }
     
     
@@ -290,6 +291,7 @@ public class FXMLUserController implements Initializable {
                 editar.setVisible(false);
                 cancelar.setVisible(false);
                 texto.setText("Add a new User");
+                eCarnet.setEditable(true);
                 clearFields();
                 
             } else {
@@ -317,6 +319,7 @@ public class FXMLUserController implements Initializable {
                 cancelar.setVisible(true);
                 texto.setText("Edit the Client");
                 eCarnet.setText(String.valueOf(c.getCarnet()));
+                eCarnet.setEditable(false);
                 eName.setText(c.getName());
                 eLastname.setText(c.getLastName());
                 eCarreer.setText(c.getCareer());
@@ -355,6 +358,7 @@ public class FXMLUserController implements Initializable {
         aceptar.setVisible(true);
         editar.setVisible(false);
         cancelar.setVisible(false);
+        eCarnet.setEditable(true);
         texto.setText("Add a new User");
     }
     

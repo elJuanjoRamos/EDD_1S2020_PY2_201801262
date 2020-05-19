@@ -18,9 +18,9 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1238.0" style="-fx-background-color: #4E0857;">
                <children>
-                  <FontAwesomeIcon glyphStyle="-fx-fill:white" iconName="CAR" size="3.5em" />
+                  <FontAwesomeIcon glyphStyle="-fx-fill:white" iconName="BOOK" size="3.5em" />
 
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="MY CARS">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="MY CATEGORIES">
                      <font>
                         <Font name="Corbel Bold" size="40.0" />
                      </font>

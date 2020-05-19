@@ -12,10 +12,7 @@ import java.util.ArrayList;
 import models.Computer;
 import nodes.SimpleListNode;
 
-/**
- *
- * @author josem
- */
+
 public class SimpleList {
     private static SimpleListNode listNode;
     private int size;
@@ -117,7 +114,7 @@ public class SimpleList {
             e.printStackTrace();
         }
 
-        Runtime.getRuntime().exec("dot -Tjpg -o src/resources/img/SimpleList.png SimpleList.dot");
+        Runtime.getRuntime().exec("dot -Tjpg -o SimpleList.png SimpleList.dot");
 
     }
      
@@ -125,7 +122,6 @@ public class SimpleList {
         String body = "";
         int counter = 0;
         SimpleListNode aux = listNode;
-         System.out.println("=============================HOLA?=============================");
         while(aux != null){
             System.out.println(aux.getComputer().getIp());
             body = body + "NodeLogChange" + counter + " [label =\"" + "IP:  " + aux.getComputer().getIp() + "\"]\n";

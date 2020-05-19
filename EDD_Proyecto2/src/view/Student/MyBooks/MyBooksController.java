@@ -154,6 +154,7 @@ public class MyBooksController implements Initializable {
      */
     public void initTableView() {
         observableList.clear();
+        tableView.getItems().clear();
         observableList = StructureController.getInstancia().getMyBooks(client.getCarnet());
         tableView.setItems(observableList);
         /*LLAMA LAS CATEGORIAS DISPONIBLES*/

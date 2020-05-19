@@ -101,7 +101,7 @@ public class AVLNode {
             e.printStackTrace();
         }
 
-        Runtime.getRuntime().exec("dot -Tjpg -o src/resources/img/AVLTree.png AVLTree.dot");
+        Runtime.getRuntime().exec("dot -Tjpg -o AVLTree.png AVLTree.dot");
     }
 
 

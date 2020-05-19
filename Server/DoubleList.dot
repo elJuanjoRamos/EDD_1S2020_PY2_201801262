@@ -1,0 +1,7 @@
+digraph grafica{
+graph[label="Lista de nodos en red", labelloc=t, fontsize=20, compound=true];
+rankdir = LR;
+node [shape=record];
+splines=false; NodeLogChange0 [label ="ID: 0\nFecha: 120-4-1::20:22:44\nNonce: 14717\nHash anterior: 0000\nHash: 0000abc0fd6046e1bc78feba156f564960e2cdba6d97bb3a20b58fbffcef6163 "]
+NodeLogChange1 [label ="ID: 1\nFecha: 120-4-1::20:22:52\nNonce: 455\nHash anterior: 0000abc0fd6046e1bc78feba156f564960e2cdba6d97bb3a20b58fbffcef6163\nHash: 00003eafe545cb5ea95d38c953beaf1c59d2a907dc11bb856652231ce1bed497 "]
+NodeLogChange0->NodeLogChange1[dir=both]}

@@ -208,7 +208,7 @@ public class HashTable<K, Object> {
             e.printStackTrace();
         }
 
-        Runtime.getRuntime().exec("dot -Tjpg -o src/resources/img/HashTable.png HashTable.dot");
+        Runtime.getRuntime().exec("dot -Tjpg -o HashTable.png HashTable.dot");
 
     }
     

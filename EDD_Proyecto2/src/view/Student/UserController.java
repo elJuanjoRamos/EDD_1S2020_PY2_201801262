@@ -82,21 +82,5 @@ public class UserController implements Initializable {
             System.out.println(ex);
             Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        /*URL url;
-        try {
-            url = new File("src/view/Student/" + component).toURI().toURL();
-            try {
-                fxml = (Parent)FXMLLoader.load(url);
-                vbox.getChildren().removeAll();
-                vbox.getChildren().setAll(fxml);
-            } catch (IOException ex) {
-                System.out.println(ex);
-                Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }*/
-
     }    
 }

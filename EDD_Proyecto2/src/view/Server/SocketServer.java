@@ -10,6 +10,15 @@ import javafx.stage.Stage;
 
 public class SocketServer extends Application {
 
+    //Singleton
+    private static SocketServer instance;
+     public static SocketServer getInstance() {
+        if (instance == null) {
+            instance = new SocketServer();
+        }
+        return instance;
+    }
+    
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("SocketServer.fxml"));
@@ -20,10 +29,4 @@ public class SocketServer extends Application {
         stage.show();
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
 }

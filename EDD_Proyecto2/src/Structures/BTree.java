@@ -232,7 +232,7 @@ public class BTree {
             e.printStackTrace();
         }
         
-        Runtime.getRuntime().exec("dot -Tjpg -o src/resources/img/BTree.png BTree.dot");
+        Runtime.getRuntime().exec("dot -Tjpg -o BTree.png BTree.dot");
 
     }
     

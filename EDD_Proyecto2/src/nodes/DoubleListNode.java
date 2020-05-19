@@ -7,10 +7,7 @@ package nodes;
 
 import models.Blockchain;
 
-/**
- *
- * @author josem
- */
+
 public class DoubleListNode {
     private Blockchain blockchain;
     private DoubleListNode next;

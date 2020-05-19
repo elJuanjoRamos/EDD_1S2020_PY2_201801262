@@ -8,10 +8,7 @@ package models;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-/**
- *
- * @author josem
- */
+
 public class Blockchain {
     private int id;
     private String dateTime;

@@ -2,7 +2,5 @@ digraph grafica{
 graph[label="Lista de nodos en red", labelloc=t, fontsize=20, compound=true];
 rankdir = LR;
 node [shape=record];
-splines=false; NodeLogChange0 [label ="ID: 0\nFecha: 120-4-1::17:52:59\nNonce: 14717\nHash anterior: 0000\nHash: 0000abc0fd6046e1bc78feba156f564960e2cdba6d97bb3a20b58fbffcef6163 "]
-NodeLogChange1 [label ="ID: 1\nFecha: 120-4-1::17:53:4\nNonce: 455\nHash anterior: 0000abc0fd6046e1bc78feba156f564960e2cdba6d97bb3a20b58fbffcef6163\nHash: 00003eafe545cb5ea95d38c953beaf1c59d2a907dc11bb856652231ce1bed497 "]
-NodeLogChange2 [label ="ID: 2\nFecha: 120-4-1::17:53:51\nNonce: 47925\nHash anterior: 00003eafe545cb5ea95d38c953beaf1c59d2a907dc11bb856652231ce1bed497\nHash: 0000502a98b66a65714312a2dee290468776341841f076d61a61db68c99cf946 "]
-NodeLogChange0->NodeLogChange1[dir=both]NodeLogChange1->NodeLogChange2[dir=both]}
+splines=false; NodeLogChange0 [label ="ID: 0\nFecha: 120-4-1::20:12:36\nNonce: 14717\nHash anterior: 0000\nHash: 0000abc0fd6046e1bc78feba156f564960e2cdba6d97bb3a20b58fbffcef6163 "]
+}

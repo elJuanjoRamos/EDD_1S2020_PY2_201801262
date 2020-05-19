@@ -72,14 +72,6 @@
                                           <Insets bottom="10.0" right="10.0" top="10.0" />
                                        </HBox.margin>
                                     </JFXButton>
-                                    <JFXButton onAction="#openTable" prefHeight="31.0" prefWidth="99.0" styleClass="success-buttton" text="Open">
-                                       <graphic>
-                                          <FontAwesomeIcon glyphStyle="-fx-fill:#007bff" iconName="PLUS" />
-                                       </graphic>
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" right="10.0" top="10.0" />
-                                       </HBox.margin>
-                                    </JFXButton>
                                  </children>
                                  <HBox.margin>
                                     <Insets left="200.0" />
@@ -97,7 +89,7 @@
                            <columns>
                               <TableColumn fx:id="carnet" maxWidth="-1.0" minWidth="150" prefWidth="300" text="CARNET" />
                               <TableColumn fx:id="name" maxWidth="-1.0" minWidth="200" prefWidth="400" text="NOMBRE" />
-                              <TableColumn fx:id="apellido" maxWidth="-1.0" minWidth="200" prefWidth="400" text="APELLIDO" />
+                              <TableColumn fx:id="lastname" maxWidth="-1.0" minWidth="200" prefWidth="400" text="APELLIDO" />
                               <TableColumn fx:id="career" maxWidth="-1.0" minWidth="200" prefWidth="400" text="CARRERA" />
                               <TableColumn fx:id="password" maxWidth="-1.0" minWidth="200" prefWidth="300" text="PASSWORD" />
                            </columns>

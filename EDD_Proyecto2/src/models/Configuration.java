@@ -5,10 +5,7 @@
  */
 package models;
 
-/**
- *
- * @author josem
- */
+
 public class Configuration {
     public static String ip;
     public static String ipServer;

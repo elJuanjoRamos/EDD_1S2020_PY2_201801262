@@ -54,6 +54,7 @@ public class ReportsController implements Initializable {
         StructureController.getInstancia().PrintAvl();
         StructureController.getInstancia().PrintSimple();
         StructureController.getInstancia().PrintTable();
+        StructureController.getInstancia().PrintDouble();
         
         
         SetImage("AVLTree", imagenView);
@@ -76,7 +77,7 @@ public class ReportsController implements Initializable {
 
     public void SetImage(String name, ImageView element) {
 
-        File file = new File("src/resources/img/" + name + ".png");
+        File file = new File(name + ".png");
         if (file.exists()) {
             if (file != null) {
                 String path = "file:///" + file.getAbsoluteFile().getParent() + "\\" + name + ".png";

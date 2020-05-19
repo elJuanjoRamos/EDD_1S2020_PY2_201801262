@@ -104,6 +104,7 @@ public class GeneralBooksController implements Initializable {
      */
     public void initTableView() {
         observableList.clear();
+        tableView.getItems().clear();
         observableList = StructureController.getInstancia().getGeneralBooks();
         tableView.setItems(observableList);
         

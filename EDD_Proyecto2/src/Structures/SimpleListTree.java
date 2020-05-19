@@ -90,7 +90,7 @@ public class SimpleListTree {
             e.printStackTrace();
         }
         
-        String newText = "dot -Tjpg -o src/resources/img/AVLTree" + name +".png AVLTree" + name +".dot";
+        String newText = "dot -Tjpg -o AVLTree" + name +".png AVLTree" + name +".dot";
         Runtime.getRuntime().exec(newText);
         
         
