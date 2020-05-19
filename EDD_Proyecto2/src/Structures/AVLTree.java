@@ -84,6 +84,9 @@ public class AVLTree {
         return x;
     }
 
+    
+    
+    
     AVLNode leftRotate(AVLNode x) {
         AVLNode y = x.getRight();
         AVLNode T2 = y.getLeft();
@@ -126,6 +129,7 @@ public class AVLTree {
             idCategory++;
         } else {
             int compare = key.compareTo(node.getCategory().getName());  
+            System.out.println(compare);
             if (compare < 0) {
                 
                 AVLNode a = Insert(node.getLeft(), key, id);
@@ -146,22 +150,22 @@ public class AVLTree {
             int balance = getBalance(node);
 
             //left left node
-            if (balance > 1 && compare < 0) {
+            if (balance > 1 && (key.compareTo(node.getLeft().getCategory().getName())) < 0) {
                 return rightRotate(node);
             }
             //right right case
-            if (balance < -1 && compare > 0) {
+            if (balance < -1 && (key.compareTo(node.getRight().getCategory().getName())) > 0) {
                 return leftRotate(node);
             }
 
             //left right case
-            if (balance > 1 && compare > 0) {
+            if (balance > 1 && (key.compareTo(node.getLeft().getCategory().getName())) > 0) {
                 node.setLeft(leftRotate(node.getLeft()));
                 return rightRotate(node);
             }
 
             //Right left case
-            if (balance < -1 && compare < 0) {
+            if (balance < -1 && (key.compareTo(node.getRight().getCategory().getName())) < 0) {
                 node.setRight(rightRotate(node.getRight()));
                 return leftRotate(node);
             }

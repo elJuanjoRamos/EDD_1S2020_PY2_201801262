@@ -65,7 +65,7 @@ public class UserController implements Initializable {
     
     @FXML 
     public void logOut( ActionEvent event ) throws Exception {
-        ServerClientController.getInstancia().stopTHread();
+        //ServerClientController.getInstancia().stopTHread();
         Account.getInstance().start(Student.getInstance().getStage());
         Student.user = null;
     }

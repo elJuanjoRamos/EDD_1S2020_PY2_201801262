@@ -66,7 +66,7 @@ public class AdminController implements Initializable {
     
     @FXML 
     public void logOut( ActionEvent event ) throws Exception {
-        ServerClientController.getInstancia().stopTHread();
+        //ServerClientController.getInstancia().stopTHread();
         Account.getInstance().start(Admin.s);
     }
     public void changeView(String component){

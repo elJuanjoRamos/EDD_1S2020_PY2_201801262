@@ -24,7 +24,6 @@ public class EDD_Proyecto2 extends Application {
         Server.getInstance().start(primaryStage);
         //SocketServer.getInstance().start(primaryStage);
     }
-
     /**
      * @param args the command line arguments
      */

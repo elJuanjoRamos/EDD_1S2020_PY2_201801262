@@ -1,0 +1,13 @@
+digraph grafica{
+rankdir=TB;graph[label="Arbol AVL", labelloc=t, fontsize=20, compound=true]
+node [shape = record, style=filled, fillcolor=white];
+nodo3 [ label ="1|Name: Fantasia\lQ.Books: 1\lBalance: -1|2"];
+nodo1 [ label ="0|Name: Contenido\lQ.Books: 4\lBalance: 0|0"];
+nodo3->nodo1
+nodo4 [ label ="1|Name: Miedo\lQ.Books: 0\lBalance: 0|1"];
+nodo5 [ label ="0|Name: Ficcion\lQ.Books: 0\lBalance: 0|0"];
+nodo4->nodo5
+nodo2 [ label ="0|Name: Prueba\lQ.Books: 3\lBalance: 0|0"];
+nodo4->nodo2
+nodo3->nodo4
+}

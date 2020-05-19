@@ -4,14 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Usuario/Documents/USAC/3.Tercer%20Año/Estructuras%20de%20Datos/Proyectos/Proyecto%202/EDD_1S2020_PY2_201801262/EDD_Proyecto2/src/Structures/SimpleListTree.java</file>
-            <file>file:/C:/Users/Usuario/Documents/USAC/3.Tercer%20Año/Estructuras%20de%20Datos/Proyectos/Proyecto%202/EDD_1S2020_PY2_201801262/EDD_Proyecto2/src/view/Student/Category/MyCategory.fxml</file>
-            <file>file:/C:/Users/Usuario/Documents/USAC/3.Tercer%20Año/Estructuras%20de%20Datos/Proyectos/Proyecto%202/EDD_1S2020_PY2_201801262/EDD_Proyecto2/src/view/account/SignIn.fxml</file>
-            <file>file:/C:/Users/Usuario/Documents/USAC/3.Tercer%20Año/Estructuras%20de%20Datos/Proyectos/Proyecto%202/EDD_1S2020_PY2_201801262/EDD_Proyecto2/src/view/Student/UserController.java</file>
-            <file>file:/C:/Users/Usuario/Documents/USAC/3.Tercer%20Año/Estructuras%20de%20Datos/Proyectos/Proyecto%202/EDD_1S2020_PY2_201801262/EDD_Proyecto2/src/view/Student/MyBooks/MyBooks.fxml</file>
-            <file>file:/C:/Users/Usuario/Documents/USAC/3.Tercer%20Año/Estructuras%20de%20Datos/Proyectos/Proyecto%202/EDD_1S2020_PY2_201801262/EDD_Proyecto2/src/view/Server/SocketServer.java</file>
-            <file>file:/C:/Users/Usuario/Documents/USAC/3.Tercer%20Año/Estructuras%20de%20Datos/Proyectos/Proyecto%202/EDD_1S2020_PY2_201801262/EDD_Proyecto2/src/view/Student/GeneralBooks/GeneralBooks.fxml</file>
-            <file>file:/C:/Users/Usuario/Documents/USAC/3.Tercer%20Año/Estructuras%20de%20Datos/Proyectos/Proyecto%202/EDD_1S2020_PY2_201801262/EDD_Proyecto2/src/view/Admin/Reports/ReportsController.java</file>
+            <file>file:/C:/Users/Usuario/Documents/USAC/3.Tercer%20Año/Estructuras%20de%20Datos/Proyectos/Proyecto%202/EDD_1S2020_PY2_201801262/EDD_Proyecto2/src/view/account/init/ServerController.java</file>
+            <file>file:/C:/Users/Usuario/Documents/USAC/3.Tercer%20Año/Estructuras%20de%20Datos/Proyectos/Proyecto%202/EDD_1S2020_PY2_201801262/EDD_Proyecto2/src/edd_proyecto2/EDD_Proyecto2.java</file>
             <file>file:/C:/Users/Usuario/Documents/USAC/3.Tercer%20Año/Estructuras%20de%20Datos/Proyectos/Proyecto%202/EDD_1S2020_PY2_201801262/EDD_Proyecto2/src/view/Server/SocketServerController.java</file>
+            <file>file:/C:/Users/Usuario/Documents/USAC/3.Tercer%20Año/Estructuras%20de%20Datos/Proyectos/Proyecto%202/EDD_1S2020_PY2_201801262/EDD_Proyecto2/src/view/account/init/Server.fxml</file>
+            <file>file:/C:/Users/Usuario/Documents/USAC/3.Tercer%20Año/Estructuras%20de%20Datos/Proyectos/Proyecto%202/EDD_1S2020_PY2_201801262/EDD_Proyecto2/src/view/Student/GeneralBooks/GeneralBooksController.java</file>
         </group>
     </open-files>
 </project-private>
