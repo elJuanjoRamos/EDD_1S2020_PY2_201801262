@@ -5,6 +5,7 @@
  */
 package edd_proyecto2;
 
+import Controller.StructureController;
 import Structures.DoubleList;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -27,6 +28,7 @@ public class EDD_Proyecto2 extends Application {
         doubleList.addLastNode("192.168.16.103");
         doubleList.addLastNode("192.168.13.104");
         */
+        
         
         //Account.getInstance().start(primaryStage);
         Server.getInstance().start(primaryStage);

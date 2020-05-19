@@ -58,15 +58,10 @@ public class UserController implements Initializable {
     }
     
     @FXML 
-    public void open_Processes( ActionEvent event ) {
-        changeView("/views/Client/Processes/ProcessesClientView.fxml");
+    public void general_library( ActionEvent event ) {
+        changeView("/view/Student/GeneralBooks/GeneralBooks.fxml");
     }
-    
-    @FXML 
-    public void open_bill( ActionEvent event ) {
-        changeView("/views/Client/PayBill/PayBillView.fxml");
-    }
-    
+
     
     @FXML 
     public void logOut( ActionEvent event ) throws Exception {

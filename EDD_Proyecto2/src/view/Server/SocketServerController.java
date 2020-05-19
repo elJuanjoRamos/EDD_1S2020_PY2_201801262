@@ -9,10 +9,12 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
+import models.Blockchain;
 import models.Book;
 import models.Category;
 import models.Computer;
@@ -125,6 +127,62 @@ public class SocketServerController implements Initializable, Runnable {
                             server.setText("Delete computer" + "\nIP: " + ip);
                             break;
                     }
+                } else if(dataServer.getBlockchain()!= null) {
+                    Blockchain c = dataServer.getBlockchain();
+                    switch(dataServer.getState()) {
+                        case "Add":
+                            StructureController.getInstancia().InsertDoubleList(c.getIp(), new Object());
+                            //UpdateBlockChain("ADD", "Computer", dataServer.getIp(), c);
+                            server.setText("Add block" + "\nIP: " + ip);
+                            break;
+                        case "Edit":
+                            server.setText("Edit block" + "\nIP: " + ip);
+                            //UpdateBlockChain("EDIT", "Computer", dataServer.getIp(), c);
+                            break;
+                        case "Del":
+                            //StructureController.getInstancia().D(c.getIp());
+                            
+                            ///UpdateBlockChain("DELETE", "Computer", dataServer.getIp(), c);
+                            server.setText("Delete block" + "\nIP: " + ip);
+                            break;
+                    }
+                } 
+                else if(dataServer.getCategoryNames().size()> 0){
+                    ArrayList<Category> c = dataServer.getCategoryNames();
+                    switch(dataServer.getState()) {
+                        case "Array":
+                            for (Category u : c) {
+                                StructureController.getInstancia().InsertAVL(u.getName(), u.getIdUser());
+                                UpdateBlockChain("ADD", "Category", ip, u);
+                            }                           
+                            server.setText("Add array" + "\nIP: " + ip);
+                            break;
+                    }
+                }
+                else if(dataServer.getUsers().size() > 0) {
+                    ArrayList<User> c = dataServer.getUsers();
+                    switch(dataServer.getState()) {
+                        case "Array":
+                            for (User u : c) {
+                                StructureController.getInstancia().InsertTable(u.getCarnet(), u.getName(), u.getLastName(), u.getCareer(), u.getPassword());
+                                UpdateBlockChain("ADD", "User", ip, u);
+                            }                           
+                            server.setText("Add array" + "\nIP: " + ip);
+                            break;
+                    }
+                } else if(dataServer.getBooks().size() > 0){
+                    
+                    ArrayList<Book> c = dataServer.getBooks();
+                    switch(dataServer.getState()){            
+                        case "Array" :
+                            for (Book book : c) {
+                                System.out.println(book.getCategory()+ " " +book.getIsbn()+ " " + book.getTittle()+ " " + book.getAutor()+ " " + book.getYear()+ " " + book.getEdition()+ " " + book.getEditorial()+ " " + book.getLanguaje()+ " " +book.getCarnet());
+                                StructureController.getInstancia().InsertB(book.getCategory(), book.getIsbn(), book.getTittle(), book.getAutor(), book.getYear(), book.getEdition(), book.getEditorial(), book.getLanguaje(), book.getCarnet());
+                                UpdateBlockChain("ADD", "Book", ip, book);
+                            }
+                            server.setText("Add Book"+ "\nIP: " + ip);
+                        break;
+                    }
                 }
                 
                 System.err.println(dataServer.getIp());
@@ -226,12 +284,12 @@ public class SocketServerController implements Initializable, Runnable {
                 dbList.show();
             }
         } 
-        
-        
-        
-        
-        
-        
+        try {
+            dbList.Print();
+        } catch (Exception e) {
+        }
+ 
+
     }
     
 }

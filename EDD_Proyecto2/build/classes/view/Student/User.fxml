@@ -72,7 +72,7 @@
                </graphic>
             </JFXButton>
             
-            <JFXButton onAction="#open_Processes" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="GENERAL LIBRARY">
+            <JFXButton onAction="#general_library" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="GENERAL LIBRARY">
                <font>
                   <Font name="Corbel" size="20.0" />
                </font>

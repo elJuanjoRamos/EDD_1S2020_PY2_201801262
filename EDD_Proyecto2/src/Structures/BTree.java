@@ -49,10 +49,17 @@ public class BTree {
         rootHeight = 1;
     }
     
-    //Recorrido del arbol b
+    //Recorrido del arbol b buscando datos de usuario
     public void traverse(int x){
         this.root.traverse(x);
     }
+    
+    
+    //Recorrido del arbol b sin datos de usuario
+    public void traverse(){
+        this.root.traverse();
+    }
+    
     //Busca una llave en el arbol b
     public boolean searchB(int x){
         return this.root.searchKey(x);

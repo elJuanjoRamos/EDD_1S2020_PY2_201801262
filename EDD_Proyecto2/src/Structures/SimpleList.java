@@ -17,7 +17,7 @@ import nodes.SimpleListNode;
  * @author josem
  */
 public class SimpleList {
-    private SimpleListNode listNode;
+    private static SimpleListNode listNode;
     private int size;
 
     public SimpleList() {
@@ -48,7 +48,8 @@ public class SimpleList {
     }
     
     public void delete(String referencia){
-        if (search(referencia)) {
+        if (search(referencia)==true) {
+            System.out.println("IP ENCONTRADA");
             if (listNode.getComputer().getIp().equals(referencia)) {
                 listNode = listNode.getNext();
             } else{
@@ -64,15 +65,13 @@ public class SimpleList {
     }
     
     public boolean search(String ip){
-        if (!esVacia()) {
-            SimpleListNode aux = listNode;
+        SimpleListNode aux = listNode;
             while(aux != null){
-                if(aux.getComputer().equals(ip)) {
+                if(aux.getComputer().getIp().equals(ip)) {
                     return true;
                 }
                 aux = aux.getNext();
             }
-        }
         return false;
     }
     
@@ -126,7 +125,9 @@ public class SimpleList {
         String body = "";
         int counter = 0;
         SimpleListNode aux = listNode;
+         System.out.println("=============================HOLA?=============================");
         while(aux != null){
+            System.out.println(aux.getComputer().getIp());
             body = body + "NodeLogChange" + counter + " [label =\"" + "IP:  " + aux.getComputer().getIp() + "\"]\n";
             aux = aux.getNext();
             counter++;

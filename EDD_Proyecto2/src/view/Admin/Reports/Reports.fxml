@@ -46,7 +46,7 @@
                     <children>
                         <TabPane id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" style="-fx-background-color: white;" tabClosingPolicy="UNAVAILABLE">
                             <tabs>
-                                <Tab text="AVL Tree Report">
+                                <Tab text="AVL Tree">
                                     <content>
                                         <StackPane prefHeight="641.0">
                                             <children>
@@ -90,7 +90,7 @@
                                         </StackPane>
                                     </content>
                                 </Tab>
-                                <Tab text="AVL Tree InOrder Report">
+                                <Tab text="AVL Tree InOrder">
                                     <content>
                                         <StackPane prefHeight="641.0">
                                             <children>
@@ -133,7 +133,7 @@
                                         </StackPane>
                                     </content>
                                 </Tab>
-                                <Tab text="AVL Tree PosOrden Report">
+                                <Tab text="AVL Tree PosOrden">
                                     <content>
                                         <StackPane prefHeight="641.0">
                                             <children>
@@ -179,7 +179,7 @@
                                     </content>
                                 </Tab>
                       
-                                <Tab text="AVL Tree PreOrdern Report">
+                                <Tab text="AVL Tree PreOrdern">
                                     <content>
                                         <StackPane prefHeight="641.0">
                                             <children>
@@ -222,7 +222,7 @@
                                     </content>
                                 </Tab>
                     
-                                <Tab text="Users Hash Table Report">
+                                <Tab text="Users Hash Table">
                                     <content>
                                         <StackPane prefHeight="641.0">
                                             <children>
@@ -265,7 +265,7 @@
                                 
                                 
                                 
-                                <Tab text="BTree Report">
+                                <Tab text="BTree">
                                     <content>
                                         <HBox prefHeight="723.0" prefWidth="1278.0">
                                             <children>
@@ -363,7 +363,7 @@
                                 
                                 
                                 
-                                <Tab text="Nodes Simple List Report">
+                                <Tab text="Nodes Simple List">
                                     <content>
                                         <StackPane prefHeight="641.0">
                                             <children>
@@ -379,8 +379,46 @@
                                                                                     <ImageView fx:id="imageSimpleList" pickOnBounds="true" preserveRatio="true">
                                                                                         
                                                                                     </ImageView>
-                                                                                    
-                                                                                   
+                                                                                </children>
+                                                                                <VBox.margin>
+                                                                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                                                                </VBox.margin>
+                                                                            </HBox>
+                                                                        </children>
+                                                                    </VBox>         
+                                                                </children>
+                                                                <effect>
+                                                                    <DropShadow color="#bbbbbb" height="10.0" radius="4.5" width="10.0" />
+                                                                </effect>
+                                                                <HBox.margin>
+                                                                    <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                                                                </HBox.margin>
+                                                            </VBox>
+                                                            <HBox.margin>
+                                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                                            </HBox.margin>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                        </StackPane>
+                                    </content>
+                                </Tab>
+                                <Tab text="Nodes Double List">
+                                    <content>
+                                        <StackPane prefHeight="641.0">
+                                            <children>
+                                                <HBox prefHeight="641.0" prefWidth="1645.0">
+                                                    <children>
+                                                        <VBox prefHeight="601.0" prefWidth="1658.0">
+                                                            <VBox alignment="CENTER" prefHeight="547.0" prefWidth="727.0" style="-fx-background-color: white;">
+                                                                <children>
+                                                                    <VBox prefHeight="388.0">
+                                                                        <children>
+                                                                            <HBox alignment="CENTER" prefHeight="52.0">
+                                                                                <children>
+                                                                                    <ImageView fx:id="imageBlockChain" pickOnBounds="true" preserveRatio="true">
+                                                                                    </ImageView>
                                                                                 </children>
                                                                                 <VBox.margin>
                                                                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

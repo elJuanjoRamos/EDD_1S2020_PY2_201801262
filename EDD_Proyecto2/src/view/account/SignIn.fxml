@@ -87,7 +87,7 @@
       </HBox>
       <HBox layoutX="51.0" layoutY="400" prefHeight="50.0" prefWidth="379.0" styleClass="tf-box">
          <children>
-            <TextField fx:id="carrera" prefHeight="49.0" prefWidth="384.0" promptText="Carreer" styleClass="tf">
+            <TextField fx:id="career" prefHeight="49.0" prefWidth="384.0" promptText="Carreer" styleClass="tf">
                <font>
                   <Font size="19.0" />
                </font>

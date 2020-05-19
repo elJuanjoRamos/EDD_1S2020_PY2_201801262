@@ -21,7 +21,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
-import javax.imageio.ImageIO;
 
 /**
  * FXML Controller class
@@ -32,27 +31,42 @@ public class ReportsController implements Initializable {
 
     @FXML
     ImageView imagenView, imageAvlInOrder, imageAvlTreePosOrden, imageBTree,
-            imageAvlTreePreOrdern, imageUsersHashTable, imageSimpleList;
+            imageAvlTreePreOrdern, imageUsersHashTable, imageSimpleList, imageBlockChain;
 
     @FXML
     ComboBox comboCategory;
     
     @FXML
     StackPane stackPane;
+
+    public ReportsController() {
+        StructureController.getInstancia().PrintAvl();
+        StructureController.getInstancia().PrintSimple();
+        StructureController.getInstancia().PrintTable();
     
+    }
+     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        
+        StructureController.getInstancia().PrintAvl();
+        StructureController.getInstancia().PrintSimple();
+        StructureController.getInstancia().PrintTable();
+        
+        
         SetImage("AVLTree", imagenView);
         SetImage("AVLTreeInOrden", imageAvlInOrder);
         SetImage("AVLTreePosOrden", imageAvlTreePosOrden);
         SetImage("AVLTreePreOren", imageAvlTreePreOrdern);
         SetImage("HashTable", imageUsersHashTable);
         SetImage("SimpleList", imageSimpleList);
+        SetImage("DoubleList", imageBlockChain);
         SetImage("BTree", imageBTree);
         
         /*LLAMA LAS CATEGORIAS DISPONIBLES*/
-        
+        StructureController.getInstancia().PrintSimple();                    
         for (Object object : StructureController.getInstancia().getMyCategory()) {
             System.out.println(object);
         }

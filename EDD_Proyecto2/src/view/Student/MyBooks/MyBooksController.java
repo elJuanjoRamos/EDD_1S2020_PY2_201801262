@@ -63,7 +63,7 @@ import view.Student.Student;
  *
  * @author Juan José Ramos
  */
-public class MyBooksController implements Initializable, Runnable {
+public class MyBooksController implements Initializable {
 
     private static MyBooksController instance;
     @FXML
@@ -382,7 +382,8 @@ public class MyBooksController implements Initializable, Runnable {
             
             // iterating phoneNumbers 
             Iterator itr2 = ja.iterator(); 
-
+            ArrayList<Book> books = new ArrayList<>();
+            ArrayList<Category> categories = new ArrayList<>();
             while (itr2.hasNext())  
             { 
                 itr1 = ((Map) itr2.next()).entrySet().iterator(); 
@@ -418,6 +419,7 @@ public class MyBooksController implements Initializable, Runnable {
                         Edicion = pair.getValue().toString();
                     }if (pair.getKey().equals("Categoria")) {
                         Categoria = (String)(pair.getValue());
+                        categories.add( new Category(client.getCarnet(), Categoria));
                     }
                     
                     
@@ -428,44 +430,47 @@ public class MyBooksController implements Initializable, Runnable {
                 e.add(Editorial);
                 
                 if (StructureController.getInstancia().searchKey(ISBN) == false) {
-                    //StructureController.getInstancia().InsertB(Categoria, ISBN, Titulo, Autor, year, t, e, Idioma, client.getCarnet());
-                    try {
-                        //String categoryName, int isbn, String tittle, String autor, int year, ArrayList edition, ArrayList editorial, String languaje, int carnet
-                        //Category c = new Category(0, client.getCarnet(), 0, eName.getText(), true);
-                        Book b = new Book(ISBN,
-                                Titulo, 
-                                Autor,
-                                Categoria,
-                                year,
-                                t, e, Idioma, client.getCarnet());
-                        Socket socket = new Socket(Configuration.ipServer, Integer.parseInt("8000"));
-                        DataServer servidorEDD = new DataServer();
-                        servidorEDD.setState("Add");
-                        servidorEDD.setIp(Configuration.ip);
-                        servidorEDD.setBook(b);
-                        ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-                        objectOutputStream.writeObject(servidorEDD);
-                        socket.close();
-                    } catch (IOException ex) {
-                        System.err.println(ex.getMessage());
-                    }
-                    StructureController.getInstancia().PrintB(Categoria);
-                    try {
-                        Thread.sleep(2000);
-                        initTableView();
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(MyBooksController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    Book b = new Book(ISBN, Titulo, Autor, Categoria, year, t, e, Idioma, client.getCarnet());
+                    books.add(b);
                 } else {
                     getAlert("A Book whit ISBN:" + ISBN + " has already been entered" );
                 }
-                
             }
             
-            //initTableView();
+            try {
+                
+                Socket socket = new Socket(Configuration.ipServer, Integer.parseInt("8000"));
+                DataServer servidorEDD = new DataServer();
+                servidorEDD.setState("Array");
+                servidorEDD.setIp(Configuration.ip);
+                servidorEDD.setCategoryNames(categories);
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+                objectOutputStream.writeObject(servidorEDD);
+                socket.close();
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
             
-            
-            
+            try {
+                
+                Socket socket = new Socket(Configuration.ipServer, Integer.parseInt("8000"));
+                DataServer servidorEDD = new DataServer();
+                servidorEDD.setState("Array");
+                servidorEDD.setIp(Configuration.ip);
+                servidorEDD.setBooks(books);
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+                objectOutputStream.writeObject(servidorEDD);
+                socket.close();
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+              
+        }
+        try {
+            Thread.sleep(2000);
+            initTableView();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MyBooksController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -540,46 +545,4 @@ public class MyBooksController implements Initializable, Runnable {
         tableView.setItems(filteredData);
     }
 
-    @Override
-    public void run() {
-        try {
-            serverSocket = serverSocket = ServerClientController.getInstancia().getServerSocket();
-            DataServer dataServer = null;
-            while(true) {
-                Socket cliente = serverSocket.accept();
-                ObjectInputStream flujoEntrada = new ObjectInputStream(cliente.getInputStream());
-                
-                dataServer = (DataServer) flujoEntrada.readObject();
-                if(dataServer.getBook()!= null) {
-                    Book b = dataServer.getBook();
-                    switch(dataServer.getState()) {
-                        case "Add":
-                            StructureController.getInstancia().InsertB(b.getCategory(), b.getIsbn(), b.getTittle(), b.getAutor(), b.getYear(), b.getEdition(), b.getEditorial(), b.getLanguaje(), b.getCarnet());
-                            //server.setText("Add book");
-                            initTableView();
-                            clearFields();
-                            break;
-                        case "Edit":
-                            //server.setText("Edit book");
-                            break;
-                        case "Del":
-                            StructureController.getInstancia().DeleteB(b.getIsbn(), b.getCategory());
-                            //server.setText("Delete book");
-                            initTableView();
-                            //dialog.close();
-                            break;
-                    }
-                    
-                    
-                }
-                cliente.close();
-                System.out.println("i am listening");
-            }
-            
-        } catch (IOException ex) {
-            System.err.println(ex.getMessage());
-        } catch (ClassNotFoundException ex) {
-            System.err.println(ex.getMessage());
-        }
-    }
 }

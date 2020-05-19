@@ -151,6 +151,34 @@ public class BTreeNode {
         }
             
     }
+    
+    
+    public void traverse() { 
+ 
+        int i = 0; 
+        int j = 0;
+        for (int k = 0; k < this.keys.length; k++) {
+            
+            if (this.keys[k] != 0) {
+                j++;
+            }
+        }
+        for (i = 0; i < j; i++) { 
+  
+            if (this.pointers[0] != null) { 
+                pointers[i].traverse(); 
+            } 
+            //System.out.print(keys[i] + " "); 
+            ar.add((Book)datas[i]);
+        } 
+  
+        if (this.pointers[0] != null) { 
+            pointers[i].traverse(); 
+        }
+            
+    }
+    
+    
     public boolean searchKey(int x) { 
   
         int i = 0; 

@@ -1,5 +1,6 @@
 package Structures;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -11,6 +12,7 @@ import java.util.Date;
 import models.Blockchain;
 import models.Configuration;
 import nodes.DoubleListNode;
+import nodes.SimpleListNode;
 import org.apache.commons.codec.binary.Hex;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -119,8 +121,6 @@ public class DoubleList {
             objectList.add(jsonObject);
             aux = aux.getNext();
         }
-        
-       
       //Write JSON file
         try (FileWriter file = new FileWriter("BlockChain.json")) {
             file.write(objectList.toJSONString());
@@ -128,11 +128,53 @@ public class DoubleList {
  
         } catch (IOException e) {
             e.printStackTrace();
-        } 
-      
-        
-        
-        
+        }   
     }
+    
+    
+    public void Print() throws IOException {
+        String texto = "";
+        
+        //
+        //texto = "digraph grafica{\n" + "rankdir=TB;" + "graph[label=\"" + name + "\", labelloc=t, fontsize=20, compound=true]\n" + "node [shape=plaintext, fontcolor=red, fontsize=18];\n\"Pointers:\" -> \"Values:\" -> \"Indices:\" [color=white];" + this.GetBody() + "\n\n}";
+        texto = "digraph grafica{\n" + "graph[label=\"Lista de nodos en red\", labelloc=t, fontsize=20, compound=true];" + "\nrankdir = LR;\nnode [shape=record];\nsplines=false; " + GetBody() + "}";
+
+        try {
+            File f = new File("DoubleList.dot");
+            if(f.exists() && !f.isDirectory()) { 
+                f.delete();
+            }
+            FileWriter myObj = new FileWriter("DoubleList.dot");
+            myObj.write(texto);
+            myObj.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+        Runtime.getRuntime().exec("dot -Tjpg -o src/resources/img/DoubleList.png DoubleList.dot");
+
+    }
+     
+     public String GetBody() {
+        String body = "";
+        int counter = 0;
+        DoubleListNode aux = first;
+        while(aux != null){
+            body = body + "NodeLogChange" + counter + " [label =\"" + "ID: " + aux.getBlockchain().getId()+ 
+                    "\\nFecha: "+aux.getBlockchain().getDateTime()+
+                    "\\nNonce: "+aux.getBlockchain().getNonce()+
+                    "\\nHash anterior: "+aux.getBlockchain().getPrecedingsHash()+
+                    "\\nHash: "+aux.getBlockchain().getHash()+
+                    " \"]\n";
+            aux = aux.getNext();
+            counter++;
+        }
+        for (int i = 0; i < counter - 1; i++)
+	{
+		body = body + "NodeLogChange" + i + "->NodeLogChange" + (i+1) + "[dir=both]";
+	}         
+        return body;
+     }
     
 }

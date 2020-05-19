@@ -36,7 +36,7 @@ public class AuthController implements Initializable {
     @FXML
     public void authenticate(ActionEvent event) throws Exception {
         
-        User u = StructureController.getInstancia().searchUser(1, "123");
+        //User u = StructureController.getInstancia().searchUser(1, "123");
                             
         //Admin.getInstance().start(Server.s);
         //Student.getInstance().start(Account.s, u);
@@ -51,12 +51,12 @@ public class AuthController implements Initializable {
                      try{
                          
                             //Integer.parseInt(user.getText());
-                            //User u = StructureController.getInstancia().searchUser(Integer.parseInt(user.getText()), pass2.getText());
-                            /*if (u != null) {
+                            User u = StructureController.getInstancia().searchUser(Integer.parseInt(user.getText()), pass2.getText());
+                            if (u != null) {
                                  Student.getInstance().start(Account.s, u);
                             } else {
                                 text.setText("User not found");
-                            }*/
+                            }
   
                             
                         } catch(Exception e){
@@ -65,7 +65,6 @@ public class AuthController implements Initializable {
                 }
             
             } else {
-                Student.getInstance().start(Account.s, u);
                 textLogin.setText("You can not leave fields blank.");
             }
             
@@ -83,22 +82,26 @@ public class AuthController implements Initializable {
     @FXML
     private void getAccess(ActionEvent event) {
         
-        if (!name.getText().isEmpty() && !pass.getText().isEmpty() &&
+        if (!name.getText().isEmpty()  && !lastname.getText().isEmpty() && !pass.getText().isEmpty() &&
              !carnet.getText().isEmpty() && !career.getText().isEmpty()) {
             
             try{
-                Long.parseLong(carnet.getText());
-                /*if (ClientsController.getInstance().verifications(user2.getText())) {
-                text.setText("This username already exists.");
-                    } else {
-                        ClientsController.getInstance().addAtEnd(dpi.getText(), name.getText(), user2.getText(), pass2.getText(), "Normal");
-                        Client c = ClientsController.getInstance().searchForUserName(user2.getText());
-                        if (c != null) {
-                            ClientView.getInstance().start(Account.s, c);
-                        } else {
-                            text.setText("User not found");
-                        }
-                    }*/
+                Integer.parseInt(carnet.getText());
+                
+                User u = StructureController.getInstancia().searchUser(Integer.parseInt(carnet.getText()));
+                
+                if (u != null) {
+                    text.setText("The user has already been added.");
+                } else {
+                    
+                    StructureController.getInstancia().InsertTable(Integer.parseInt(carnet.getText()), name.getText(), 
+                            lastname.getText(), career.getText(), pass.getText());
+                    
+                    User user = StructureController.getInstancia().searchUser(Integer.parseInt(carnet.getText()));
+                    Student.getInstance().start(Account.s, user);
+                    
+                }
+                            
             } catch(Exception e){
                 text.setText("The DPI value can only be numeric.");
             }

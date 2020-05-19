@@ -25,6 +25,11 @@ public class Category implements Serializable{
         this.name = name;
         this.haveBooks = haveBooks;
     }
+    
+    public Category(int idUser, String name) {
+        this.idUser = idUser;
+        this.name = name;
+    }
 
     public int getId() {
         return id;

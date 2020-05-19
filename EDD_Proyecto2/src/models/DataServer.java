@@ -2,6 +2,7 @@
 package models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class DataServer  implements Serializable {
     private User user;
@@ -11,6 +12,12 @@ public class DataServer  implements Serializable {
     private Category category;
     private Computer computer;
     private Blockchain blockchain;
+    private ArrayList<Book> books = new ArrayList();    
+    private ArrayList<Category> categorys = new ArrayList();    
+    private ArrayList<User> users = new ArrayList();
+    private ArrayList<Category> categoryNames = new ArrayList();
+
+
 
     public DataServer() {
     }
@@ -70,5 +77,40 @@ public class DataServer  implements Serializable {
     public void setComputer(Computer computer) {
         this.computer = computer;
     }
+
+    public ArrayList<Book> getBooks() {
+        return books;
+    }
+
+    public ArrayList<Category> getCategorys() {
+        return categorys;
+    }
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public void setBooks(ArrayList<Book> books) {
+        System.out.println("llego");
+        this.books = books;
+    }
+
+    public void setCategorys(ArrayList<Category> categorys) {
+        this.categorys = categorys;
+    }
+
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
+    }
+
+    public ArrayList<Category> getCategoryNames() {
+        return categoryNames;
+    }
+
+    public void setCategoryNames(ArrayList<Category> categoryNames) {
+        this.categoryNames = categoryNames;
+    }
+  
     
+        
 }

@@ -84,17 +84,7 @@ public class ServerController implements Initializable {
         //StructureController.getInstancia().InsertSimple(Configuration.ip, Integer.parseInt(Configuration.port));
         StructureController.getInstancia().PrintSimple();
         Account.getInstance().start(Server.s);
-        /*Parent root;
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("view/account/Account.fxml"));
-        Stage stage2 = new Stage();
-        stage2.setTitle("Login");
-        stage2.setScene(new Scene(root));
-        stage2.show();
-        // Hide this current window (if this is what you want)
-        //((Stage)(event.getSource())).getScene().getWindow().hide();
-        Stage stage = (Stage) authenticate.getScene().getWindow();
-        // do what you have to do
-        stage.hide();*/
+       
     }
     
 }

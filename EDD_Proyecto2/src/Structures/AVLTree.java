@@ -393,6 +393,21 @@ public class AVLTree {
         return tempBook;
         
     }
+    
+    public ArrayList getBGeneralObjects(){
+        tempBook.clear();
+        if (root != null) {
+            if (root.getBtree().getRoot() != null) {
+                root.getBtree().getRoot().clearArray();        
+            }
+            getBGeneralObjects(root);
+
+        }
+        return tempBook;
+        
+    }
+    
+    
     public ArrayList getCObjects(int x){
         tempCategory.clear();
         if (root != null) {
@@ -420,6 +435,8 @@ public class AVLTree {
                 if (node.getBtree().getRoot().searchKey(k)) {
                     return true;
                 }
+            } else {
+                return false;
             } 
             if (SearchKey(k, node.getLeft())) {
                 return true;
@@ -427,9 +444,11 @@ public class AVLTree {
             if (SearchKey(k, node.getRight())) {
                 return true;
             }
+        } else {
+            return false;
         }
-        
         return false;
+        
     }
     
     
@@ -451,6 +470,28 @@ public class AVLTree {
             }
             getBObjects(x, node.getLeft());
             getBObjects(x, node.getRight());
+
+        } 
+    }
+    
+    public void getBGeneralObjects(AVLNode node){
+        
+        if (node != null) {
+            if (node.getBtree().getRoot() != null) {
+                
+                node.getBtree().traverse();
+                ArrayList ar = node.getBtree().getRoot().getArray();
+                if (ar != null) {
+                    for (Object object : ar) {
+                        
+                        if (!this.tempBook.contains(object)) {
+                            this.tempBook.add((Book)object);    
+                        }
+                    }
+                }
+            }
+            getBGeneralObjects(node.getLeft());
+            getBGeneralObjects(node.getRight());
 
         } 
     }

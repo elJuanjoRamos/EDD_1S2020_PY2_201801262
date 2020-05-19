@@ -18,6 +18,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -50,7 +51,7 @@ import org.json.simple.parser.*;
  *
  * @author Juan José Ramos
  */
-public class FXMLUserController implements Initializable, Runnable {
+public class FXMLUserController implements Initializable {
 
     
  private static FXMLUserController instance;
@@ -139,7 +140,7 @@ public class FXMLUserController implements Initializable, Runnable {
 
             // iterating phoneNumbers 
             Iterator itr2 = ja.iterator(); 
-
+            ArrayList<User> users = new ArrayList<>();
             while (itr2.hasNext())  
             { 
                 itr1 = ((Map) itr2.next()).entrySet().iterator(); 
@@ -167,19 +168,21 @@ public class FXMLUserController implements Initializable, Runnable {
                         carnet = Integer.parseInt(pair.getValue().toString());
                     }
                 }
-                try {
-                    User u = new User(carnet, name, lastname, career, password);
-                    Socket socket = new Socket(Configuration.ipServer, Integer.parseInt("8000"));
-                    DataServer servidorEDD = new DataServer();
-                    servidorEDD.setState("Add");
-                    servidorEDD.setIp(Configuration.ip);
-                    servidorEDD.setUser(u);
-                    ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-                    objectOutputStream.writeObject(servidorEDD);
-                    socket.close();
-                } catch (IOException ex) {
-                    System.err.println(ex.getMessage());
-                }
+                User u = new User(carnet, name, lastname, career, password);
+                users.add(u);
+            }
+            try {
+                
+                Socket socket = new Socket(Configuration.ipServer, Integer.parseInt("8000"));
+                DataServer servidorEDD = new DataServer();
+                servidorEDD.setState("Array");
+                servidorEDD.setIp(Configuration.ip);
+                servidorEDD.setUsers(users);
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+                objectOutputStream.writeObject(servidorEDD);
+                socket.close();
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
             }
             
         }
@@ -393,54 +396,5 @@ public class FXMLUserController implements Initializable, Runnable {
         } catch (NumberFormatException e) {
             return false;
         }
-    }
-
-    @Override
-    public void run() {
-        try {
-            ServerSocket serverSocket = new ServerSocket(Integer.parseInt("8200"));
-            DataServer dataServer = null;
-            while(true) {
-                Socket cliente = serverSocket.accept();
-                ObjectInputStream flujoEntrada = new ObjectInputStream(cliente.getInputStream());
-                
-                dataServer = (DataServer) flujoEntrada.readObject();
-                if(dataServer.getUser() != null) {
-                    User u = dataServer.getUser();
-
-                    switch(dataServer.getState()) {
-                        case "Add":
-                            StructureController.getInstancia().InsertTable(u.getCarnet(), u.getName(), u.getLastName(), u.getCareer(), u.getPassword());
-                            clearFields();
-                            initTableView();
-                            StructureController.getInstancia().PrintTable();
-                            break;
-                        case "Edit":
-                            StructureController.getInstancia().UpdateTable(u.getCarnet(), u.getName(), u.getLastName(), u.getCareer(), u.getPassword());
-                            clearFields();
-                            initTableView();
-                            StructureController.getInstancia().PrintTable();
-                            break;
-                        case "Del":
-                            StructureController.getInstancia().DeleteTable(u.getCarnet());
-                            tableView.getSelectionModel().clearSelection();
-                            initTableView();
-                            StructureController.getInstancia().PrintTable();
-                            break;
-                    }
-                    
-                    
-                }
-                cliente.close();
-                System.out.println("i am listening");
-            }
-            
-        } catch (IOException ex) {
-            System.err.println(ex.getMessage());
-        } catch (ClassNotFoundException ex) {
-            System.err.println(ex.getMessage());
-        }
-    }
-    
-    
+    }    
 }

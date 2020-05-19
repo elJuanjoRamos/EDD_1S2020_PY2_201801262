@@ -34,7 +34,6 @@ public class StructureController {
     
     //VARIABLES GLOBALES DE ESTRUCTURAS
     AVLTree arbol = new AVLTree();
-    BTree arbolb = new BTree(5);
     HashTable table = new HashTable(7);
     SimpleList simpleList = new SimpleList();
     DoubleList dbList = new DoubleList();
@@ -44,13 +43,17 @@ public class StructureController {
     private ObservableList<Book> books;
     private ObservableList<Object> category;
     private ObservableList<Object> computers;
-
+    private ObservableList<Book> generalBook;
+    
+    
     public StructureController() {
         users = FXCollections.observableArrayList();
         books = FXCollections.observableArrayList();
         category = FXCollections.observableArrayList();
         computers = FXCollections.observableArrayList();
-        InsertTable(1, "Juan", "Ramos", "Sistemas", "123");
+        generalBook = FXCollections.observableArrayList();
+        InsertTable(1, "Usuario1", "U", "U", "123");
+        InsertTable(2, "Usuario2", "U", "U", "123");
     }
 
     public SimpleList getSimpleList() {
@@ -76,9 +79,9 @@ public class StructureController {
     }
     public ObservableList<Book> getMyBooks(int carnet){
         this.books.clear();
-        
+        System.out.println(carnet);
         ArrayList ar = arbol.getBObjects(carnet);
-        
+        System.out.println(ar);
         if (ar != null) {
             for (Object o : ar) {
                 this.books.add((Book)o);
@@ -89,6 +92,20 @@ public class StructureController {
         
         return this.books;
     }
+    public ObservableList<Book> getGeneralBooks(){
+        this.generalBook.clear();
+        ArrayList ar = arbol.getBGeneralObjects();
+        if (ar != null) {
+            for (Object o : ar) {
+                this.generalBook.add((Book)o);
+            }
+        } else {
+            return null;
+        }
+        
+        return this.generalBook;
+    }
+    
     public ObservableList<Object> getMyCategory(int carnet){
         this.category.clear();
         
@@ -122,6 +139,7 @@ public class StructureController {
     public void InsertB(String categoryName, int isbn, String tittle, String autor, int year, ArrayList edition, ArrayList editorial, String languaje, int carnet){
         
         if (searchAVL(categoryName) == null) {
+            
             InsertAVL(categoryName, carnet);
         }
         Book b = new Book(isbn, tittle, autor, categoryName, year, edition, editorial, languaje, carnet);
@@ -175,6 +193,7 @@ public class StructureController {
     public User searchUser(int carnet, String password){
             return (User)table.get(carnet, MD5(password));
     }
+    
     public ObservableList<User> getUsers(){
         this.users.clear();
         for (Object object : table.getHashTable()) {
@@ -236,5 +255,19 @@ public class StructureController {
          }
          return null;
      }
+    
+    public void InsertDoubleList(String ip, Object port) {
+        dbList.addLastNode(ip, port);
+    }
+
+    
+    
+    public void PrintDouble(){
+        try {
+            dbList.Print();
+        } catch (Exception e) {
+            System.out.println(e);
+        }        
+    }
 
 }

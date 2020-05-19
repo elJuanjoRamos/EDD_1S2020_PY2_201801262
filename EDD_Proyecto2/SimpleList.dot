@@ -2,4 +2,6 @@ digraph grafica{
 graph[label="Lista de nodos en red", labelloc=t, fontsize=20, compound=true];
 rankdir = LR;
 node [shape=record];
-splines=false; }
+splines=false; NodeLogChange0 [label ="IP:  192.168.0.116"]
+NodeLogChange1 [label ="IP:  192.168.0.110"]
+NodeLogChange0->NodeLogChange1}

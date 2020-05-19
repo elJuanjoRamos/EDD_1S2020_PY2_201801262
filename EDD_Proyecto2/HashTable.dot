@@ -2,5 +2,5 @@ digraph grafica{
 graph[label="Usuarios", labelloc=t, fontsize=20, compound=true];
 rankdir = LR;
 node [shape=record];
-splines=false; hashTable [label="<f0> Indice: 0\lNombre: Juanito\lApellido: Hernandez\lCarnet: 201503477\lCarrera: Ingenieria Civil|<f1> Indice: 1\lNombre: Juan\lApellido: Ramos\lCarnet: 1\lCarrera: Sistemas|<f2>NULL|<f3>NULL|<f4> Indice: 4\lNombre: Antonio\lApellido: Hernandez\lCarnet: 202005878\lCarrera: Ingenieria Electrica|<f5>NULL|<f6> Indice: 6\lNombre: Ricardo\lApellido: Cutz\lCarnet: 201503476\lCarrera: Ingenieria en Sistemas"];
+splines=false; hashTable [label="<f0>NULL|<f1> Indice: 1\lNombre: Usuario1\lApellido: U\lCarnet: 1\lCarrera: U|<f2> Indice: 2\lNombre: Usuario2\lApellido: U\lCarnet: 2\lCarrera: U|<f3>NULL|<f4>NULL|<f5>NULL|<f6>NULL"];
 }

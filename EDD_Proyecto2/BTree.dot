@@ -1,4 +1,4 @@
 digraph g { 
- graph[label="Arbol B Categoria: Comida", labelloc=t, fontsize=20, compound=true]; node [shape=record];
-Nodo305804[label="<P0>| ISBN:10777\lTittle: Procesamiento de papas|<P1>"];
+ graph[label="Arbol B Categoria: Fantasia", labelloc=t, fontsize=20, compound=true]; node [shape=record];
+Nodo1421237063[label="<P0>| ISBN:10777\lTittle: Guardado en cliente fisico|<P1>"];
 }
